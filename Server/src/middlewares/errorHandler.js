@@ -3,7 +3,10 @@ const errorHandler = (fn) => {
         try {
             await fn(req, res, next);
         } catch(error) {
-            const message = error.response.data.error;
+            const message = (error.response)
+                ? "(RAWG): " + error.response.data.error
+                : "(LOCAL): " + error.message;
+
             res.status(500).json({ error: message });
         }
     }
