@@ -1,13 +1,13 @@
 const getGenres = require('./Genres/getGenres.js');
-const getVGByID = require('./Videogames/getVGByID.js');
-const getVGByName = require('./Videogames/getVGByName.js');
-const getVideogames = require('./Videogames/getVideogames.js');
-const postVideogame = require('./Videogames/postVideogame.js');
+const getGameByID = require('./Games/getGameByID.js');
+const getGames = require('./Games/getGames.js');
+const getGamesByName = require('./Games/getGamesByName.js');
+const postGame = require('./Games/postGame.js');
 
 module.exports = {
     getGenres,
-    getVGByID,
-    getVGByName,
-    getVideogames,
-    postVideogame
+    getGameByID,
+    getGames,
+    getGamesByName,
+    postGame
 };
