@@ -1,7 +1,7 @@
-const handleGenres = require('./handleGenres.js');
-const handleVideogames = require('./handleVideogames.js');
+const handlerGenres = require('./handlerGenres.js');
+const handlerVideogames = require('./handlerVideogames.js');
 
 module.exports = {
-    handleGenres,
-    handleVideogames
+    handlerGenres,
+    handlerVideogames
 };
