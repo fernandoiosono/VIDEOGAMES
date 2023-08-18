@@ -12,7 +12,7 @@ const { LOCALHOST_PORT } = process.env;
 server.use(cors());
 server.use(morgan("dev"));
 
-// server.use('/videogames/games', handlerGames);
+server.use('/videogames/games', handlerGames);
 server.use('/videogames/genres', handlerGenres);
 
 database.sync({ force: true })
