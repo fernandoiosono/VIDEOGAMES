@@ -5,7 +5,8 @@ const server = require('./src/server.js');
 const { database } = require('./src/database/database.js')
 
 const { handlerGames, 
-	handlerGenres } = require('./src/routes');
+	handlerGenres,
+	handlerPlatforms } = require('./src/routes');
 
 const { LOCALHOST_PORT } = process.env;
 
@@ -14,6 +15,7 @@ server.use(morgan("dev"));
 
 server.use('/videogames/games', handlerGames);
 server.use('/videogames/genres', handlerGenres);
+server.use('/videogames/platforms', handlerPlatforms);
 
 database.sync({ force: true })
 	.then(() => {
