@@ -2,7 +2,7 @@ const { DataTypes: dtype } = require('sequelize');
 
 module.exports = (database) => {
     database.define('Platforms', {
-        id: {
+        idPlatform: {
             type: dtype.INTEGER,
             primaryKey: true
         },
