@@ -14,15 +14,15 @@ const getPlatforms = async () => {
 
         for (let x = 0; x < data.results.length; x++) {
             const platform = data.results[x];
-            const obj = { id: platform.id, name: platform.name };
+            const obj = { idPlatform: platform.id, name: platform.name };
             
             arrResult.push(obj);
         }
     
-        arrResult.sort((a, b) => { return a.id - b.id });
-
         nextPage = data.next;
     } while (nextPage);
+
+    arrResult.sort((a, b) => { return a.idPlatform - b.idPlatform });
     
     if (!platformsDB.length) await Platforms.bulkCreate(arrResult);
     

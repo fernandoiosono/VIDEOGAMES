@@ -14,15 +14,15 @@ const getGenres = async () => {
 
         for (let x = 0; x < data.results.length; x++) {
             const genre = data.results[x];
-            const obj = { id: genre.id, name: genre.name };
+            const obj = { idGenre: genre.id, name: genre.name };
             
             arrResult.push(obj);
         }
     
-        arrResult.sort((a, b) => { return a.id - b.id });
-
         nextPage = data.next;
     } while (nextPage);
+
+    arrResult.sort((a, b) => { return a.idGenre - b.idGenre });
 
     if (!genresDB.length) await Genres.bulkCreate(arrResult);
     
