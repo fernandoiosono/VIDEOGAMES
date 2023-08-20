@@ -1,9 +1,9 @@
-const gameModel = require('./Game.js');
-const genreModel = require('./Genre.js');
-const platformModel = require('./Platform.js');
+const defineGame = require('./Game.js');
+const defineGenre = require('./Genre.js');
+const definePlatform = require('./Platform.js');
 
 module.exports = {
-    gameModel,
-    genreModel,
-    platformModel
+    defineGame,
+    defineGenre,
+    definePlatform
 };
