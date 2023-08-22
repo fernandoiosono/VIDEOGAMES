@@ -1,22 +1,43 @@
 require('dotenv').config();
 const axios = require('axios');
-const { Games } = require('../../database/database.js');
+
+const { Games, 
+    GamesGenres, 
+    GamesPlatforms } = require('../../database/database.js');
 
 const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
 
 const getVGByID = async (pID) => {
     if (isNaN(pID)) {
-        const game = await Games.findOne({
-            where: { id: pID }
+        const dataGame = await Games.findOne({
+            where: { idGame: pID }
+
+            // Checar por qué este código no funciona
+            // Arroja un Error que dice que no hay relación entre las tablas :(
+            // Al parecer con este código nos ahorraríamos la siguientes 2 consultas...
+
+            // include: [
+            //     { model: GamesGenres, attributes: 'idGenre' },
+            //     { model: GamesPlatforms, attributes: 'idPlatform' }
+            // ]
         });
 
-        // const { id, name, image, released, rating,
-        //     description/*, platforms, genres*/ } = game;
+        const genres = await GamesGenres.findAll({
+            where: { idGame: pID },
+            attributes: ['idGenre']
+        });
 
-        //     const obj = { id, name, image, released, rating,
-        //         // genres: getArrIDs(genres, 'genre'), 
-        //         // platforms: getArrIDs(platforms, 'platform'), 
-        //         description };
+        const platforms = await GamesPlatforms.findAll({
+            where: { idGame: pID },
+            attributes: ['idPlatform']
+        });
+
+        const { name, image, released, rating,
+            description } = dataGame;
+
+            const game = { id: pID, name, image, released, rating, description,
+                genres: getArrIDs(genres, 'genre', 'database'), 
+                platforms: getArrIDs(platforms, 'platform', 'database') };
 
         return game;
     } else {
@@ -25,22 +46,33 @@ const getVGByID = async (pID) => {
         const { id, name, background_image, released, rating,
             description, platforms, genres } = data;
 
-        const obj = { id, name, image: background_image, released, rating,
-            genres: getArrIDs(genres, 'genre'), 
-            platforms: getArrIDs(platforms, 'platform'), 
-            description };
+        const game = { id, name, image: background_image, released, rating, description,
+            genres: getArrIDs(genres, 'genre', 'api'), 
+            platforms: getArrIDs(platforms, 'platform', 'api') };
 
-        return obj;
+        return game;
     }
 };
 
-const getArrIDs = (obj, type) => { // Get an Ordered Array of ID Genres
+const getArrIDs = (obj, type, origin) => { // Get an Ordered Array of ID Genres
     const arrIDs = [];
 
     for (let x = 0; x < obj.length; x++) {
-        const id = (type === 'genre') 
-            ? obj[x].id
-            : obj[x].platform.id;
+        let id = 0;
+
+        switch (origin) {
+            case "database":
+                id = (type === 'genre') 
+                    ? obj[x].dataValues.idGenre
+                    : obj[x].dataValues.idPlatform;
+                break;
+
+            case "api":
+                id = (type === 'genre') 
+                    ? obj[x].id
+                    : obj[x].platform.id;
+                break;
+        };
 
         arrIDs.push(id);
     }
