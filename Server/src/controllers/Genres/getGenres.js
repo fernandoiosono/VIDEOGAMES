@@ -5,7 +5,7 @@ const { Genres } = require('../../database/database.js');
 const { RAWG_URL_GENRES, RAWG_API_KEY } = process.env;
 
 const getGenres = async () => {
-    const arrResult = [];
+    const arrGenres = [];
     const genresDB = await Genres.findAll();
     let nextPage = `${RAWG_URL_GENRES}?key=${RAWG_API_KEY}`;
 
@@ -16,17 +16,17 @@ const getGenres = async () => {
             const genre = data.results[x];
             const obj = { idGenre: genre.id, name: genre.name };
             
-            arrResult.push(obj);
+            arrGenres.push(obj);
         }
     
         nextPage = data.next;
     } while (nextPage);
 
-    arrResult.sort((a, b) => { return a.idGenre - b.idGenre });
+    arrGenres.sort((a, b) => { return a.idGenre - b.idGenre });
 
-    if (!genresDB.length) await Genres.bulkCreate(arrResult);
+    if (!genresDB.length) await Genres.bulkCreate(arrGenres);
     
-    return arrResult;
+    return arrGenres;
 };
 
 module.exports = getGenres;

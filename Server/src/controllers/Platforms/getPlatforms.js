@@ -5,7 +5,7 @@ const { Platforms } = require('../../database/database.js');
 const { RAWG_URL_PLATFORMS, RAWG_API_KEY } = process.env;
 
 const getPlatforms = async () => {
-    const arrResult = [];
+    const arrPlatforms = [];
     const platformsDB = await Platforms.findAll();
     let nextPage = `${RAWG_URL_PLATFORMS}?key=${RAWG_API_KEY}`;
 
@@ -16,17 +16,17 @@ const getPlatforms = async () => {
             const platform = data.results[x];
             const obj = { idPlatform: platform.id, name: platform.name };
             
-            arrResult.push(obj);
+            arrPlatforms.push(obj);
         }
     
         nextPage = data.next;
     } while (nextPage);
 
-    arrResult.sort((a, b) => { return a.idPlatform - b.idPlatform });
+    arrPlatforms.sort((a, b) => { return a.idPlatform - b.idPlatform });
     
-    if (!platformsDB.length) await Platforms.bulkCreate(arrResult);
+    if (!platformsDB.length) await Platforms.bulkCreate(arrPlatforms);
     
-    return arrResult;
+    return arrPlatforms;
 };
 
 module.exports = getPlatforms;
