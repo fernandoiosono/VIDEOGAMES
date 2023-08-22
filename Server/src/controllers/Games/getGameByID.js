@@ -58,21 +58,14 @@ const getArrIDs = (obj, type, origin) => { // Get an Ordered Array of ID Genres
     const arrIDs = [];
 
     for (let x = 0; x < obj.length; x++) {
-        let id = 0;
-
-        switch (origin) {
-            case "database":
-                id = (type === 'genre') 
+        const id = 
+            (origin === "database")
+                ? (type === "genre")
                     ? obj[x].dataValues.idGenre
-                    : obj[x].dataValues.idPlatform;
-                break;
-
-            case "api":
-                id = (type === 'genre') 
+                    : obj[x].dataValues.idPlatform
+                : (type === "genre")
                     ? obj[x].id
                     : obj[x].platform.id;
-                break;
-        };
 
         arrIDs.push(id);
     }
