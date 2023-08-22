@@ -8,8 +8,8 @@ const { handlerGames,
 	handlerGenres,
 	handlerPlatforms } = require('./src/routes');
 
-const { LOCALHOST_PORT, DB_FORCE } = process.env;
-const dbForce = (DB_FORCE === "true")
+const { LOCALHOST_PORT, DB_RESET } = process.env;
+const dbReset = (DB_RESET === "true")
 
 server.use(cors());
 server.use(morgan("dev"));
@@ -18,7 +18,7 @@ server.use('/videogames/games', handlerGames);
 server.use('/videogames/genres', handlerGenres);
 server.use('/videogames/platforms', handlerPlatforms);
 
-database.sync({ force: dbForce })
+database.sync({ force: dbReset })
 	.then(() => {
 		server.listen(LOCALHOST_PORT, () => {
 			console.log(`Server raised in port: ${LOCALHOST_PORT}`);
