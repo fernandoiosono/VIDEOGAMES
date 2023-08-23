@@ -63,7 +63,7 @@ const getGames = async () => {
         }
 
         nextPage = data.next;
-    } while (arrGames.length < 100);
+    } while (nextPage);
 
     return arrGames;
 };
