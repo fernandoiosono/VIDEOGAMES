@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Games, GamesGenres, Genres } = require('../../database/database.js');
+const { Game, GameGenre, Genre } = require('../../database/database.js');
 
 const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
 
@@ -10,7 +10,7 @@ const getGamesByName = async (name) => {
     const arrGames = [];
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    const dataGames = await Games.findAll({
+    const dataGames = await Game.findAll({
         where: {
             name: {
                 [Op.iLike]: `%${name}%`
@@ -22,13 +22,13 @@ const getGamesByName = async (name) => {
         const arrGenres = [];
         const dataGame = dataGames[x].dataValues;
 
-        const idGenres = await GamesGenres.findAll({
+        const idGenres = await GameGenre.findAll({
             where: { idGame: dataGame.idGame },
             attributes: ['idGenre']
         });
 
         for (let x = 0; x < idGenres.length; x++) {
-            const nameGenres = await Genres.findOne({
+            const nameGenres = await Genre.findOne({
                 where: { idGenre: idGenres[x].dataValues.idGenre },
                 attributes: ['name']
             });
