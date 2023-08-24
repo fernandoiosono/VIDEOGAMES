@@ -1,10 +1,9 @@
 const { DataTypes: dtype } = require('sequelize');
 
 module.exports = (database) => {
-    database.define('Games', {
+    database.define('Game', {
         idGame: {
             type: dtype.UUID,
-            defaultValue: dtype.UUIDV4,
             primaryKey: true
         },
         name: {
