@@ -1,15 +1,15 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const { Games, 
-    GamesGenres, 
-    GamesPlatforms } = require('../../database/database.js');
+const { Game, 
+    GameGenre, 
+    GamePlatform } = require('../../database/database.js');
 
 const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
 
 const getVGByID = async (pID) => {
     if (isNaN(pID)) {
-        const dataGame = await Games.findOne({
+        const dataGame = await Game.findOne({
             where: { idGame: pID }
 
             // Checar por qué este código no funciona
@@ -22,12 +22,12 @@ const getVGByID = async (pID) => {
             // ]
         });
 
-        const genres = await GamesGenres.findAll({
+        const genres = await GameGenre.findAll({
             where: { idGame: pID },
             attributes: ['idGenre']
         });
 
-        const platforms = await GamesPlatforms.findAll({
+        const platforms = await GamePlatform.findAll({
             where: { idGame: pID },
             attributes: ['idPlatform']
         });
