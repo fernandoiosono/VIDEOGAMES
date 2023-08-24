@@ -1,12 +1,12 @@
 require('dotenv').config();
 const axios = require('axios');
-const { Genres } = require('../../database/database.js');
+const { Genre } = require('../../database/database.js');
 
 const { RAWG_URL_GENRES, RAWG_API_KEY } = process.env;
 
 const getGenres = async () => {
     const arrGenres = [];
-    const genresDB = await Genres.findAll();
+    const genresDB = await Genre.findAll();
     let nextPage = `${RAWG_URL_GENRES}?key=${RAWG_API_KEY}`;
 
     do {
@@ -24,7 +24,7 @@ const getGenres = async () => {
 
     arrGenres.sort((a, b) => { return a.idGenre - b.idGenre });
 
-    if (!genresDB.length) await Genres.bulkCreate(arrGenres);
+    if (!genresDB.length) await Genre.bulkCreate(arrGenres);
     
     return arrGenres;
 };
