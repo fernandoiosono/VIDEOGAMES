@@ -1,12 +1,12 @@
 require('dotenv').config();
 const axios = require('axios');
-const { Platforms } = require('../../database/database.js');
+const { Platform } = require('../../database/database.js');
 
 const { RAWG_URL_PLATFORMS, RAWG_API_KEY } = process.env;
 
 const getPlatforms = async () => {
     const arrPlatforms = [];
-    const platformsDB = await Platforms.findAll();
+    const platformsDB = await Platform.findAll();
     let nextPage = `${RAWG_URL_PLATFORMS}?key=${RAWG_API_KEY}`;
 
     do {
@@ -24,7 +24,7 @@ const getPlatforms = async () => {
 
     arrPlatforms.sort((a, b) => { return a.idPlatform - b.idPlatform });
     
-    if (!platformsDB.length) await Platforms.bulkCreate(arrPlatforms);
+    if (!platformsDB.length) await Platform.bulkCreate(arrPlatforms);
     
     return arrPlatforms;
 };
