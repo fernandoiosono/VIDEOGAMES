@@ -2,11 +2,11 @@ require('dotenv').config();
 const axios = require('axios');
 const { Game, Genre } = require('../../database/database.js');
 
-const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
+const { RAWG_URL_GAMES, RAWG_API_KEY, QTY_GAMES_ALL } = process.env;
 let nextPage = `${RAWG_URL_GAMES}?key=${RAWG_API_KEY}`;
 
 const getGames = async () => {
-    let countGames = 100;
+    let countGames = QTY_GAMES_ALL;
     const arrGames = [];
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
