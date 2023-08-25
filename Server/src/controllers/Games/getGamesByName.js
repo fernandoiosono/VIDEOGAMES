@@ -78,7 +78,7 @@ const getGamesByName = async (name) => {
     return arrGames;
 };
 
-const getArrNames = (obj, type, origin) => { // Get an Ordered Array of ID Genres
+const getArrNames = (obj) => { // Get an Ordered Array of ID Genres
     const arrIDs = [];
 
     for (let x = 0; x < obj.length; x++) {
