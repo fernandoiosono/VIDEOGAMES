@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
-const { Game, GameGenre, Genre } = require('../../database/database.js');
+const { Game, Genre } = require('../../database/database.js');
 
 const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
 let nextPage = `${RAWG_URL_GAMES}?key=${RAWG_API_KEY}`;
@@ -10,36 +10,23 @@ const getGames = async () => {
     const arrGames = [];
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    const dataGames = await Game.findAll();
+    const dataGames = await Game.findAll({
+        include: [
+            { model: Genre, attributes: ['name'] }
+        ]
+    });
 
     for (let x = 0; x < dataGames.length; x++) {
-        const arrGenres = [];
-        const dataGame = dataGames[x].dataValues;
+        const game = dataGames[x].dataValues;
 
-        const idGenres = await GameGenre.findAll({
-            where: { idGame: dataGame.idGame },
-            attributes: ['idGenre']
-        });
+        game.genres = game.Genres.map(genre => genre.dataValues.name);
 
-        for (let x = 0; x < idGenres.length; x++) {
-            const nameGenres = await Genre.findOne({
-                where: { idGenre: idGenres[x].dataValues.idGenre },
-                attributes: ['name']
-            });
-
-            arrGenres.push(nameGenres.dataValues.name);
-        }
-
-        const game = { id: dataGame.idGame, 
-            name: dataGame.name, 
-            image: dataGame.image,
-            rating: dataGame.rating,
-            genres: arrGenres };
+        delete game.Genres;
 
         arrGames.push(game);
     }
 
-    countGames -= dataGames.length;
+    countGames -= arrGames.length;
     
     // Get Games From API @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     do {
@@ -49,11 +36,11 @@ const getGames = async () => {
             if (countGames) {
                 const obj = data.results[x];
             
-                const game = { id: obj.id, 
+                const game = { idGame: obj.id, 
                     name: obj.name, 
                     image: obj.background_image,
                     rating: obj.rating,
-                    genres: getArrNames(obj.genres) };
+                    genres: obj.genres.map(genre => genre.name) };
 
                 arrGames.push(game);
                 countGames -= 1;
@@ -66,18 +53,6 @@ const getGames = async () => {
     } while (nextPage);
 
     return arrGames;
-};
-
-const getArrNames = (obj) => { // Get an Ordered Array of ID Genres
-    const arrNames = [];
-
-    for (let x = 0; x < obj.length; x++) {
-        const name = obj[x].name;
-
-        arrNames.push(name);
-    }
-
-    return arrNames;
 };
 
 module.exports = getGames;
