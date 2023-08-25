@@ -1,13 +1,20 @@
 require('dotenv').config();
-const axios = require('axios');
-// const { Games } = require('../../database/database.js');
+const { Game } = require('../../database/database.js');
 
-const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
+const { newGameDataIsValid, 
+    newGameID } = require('../../helpers');
 
-const postVideogame = async () => {
-    const { data } = await axios(`${RAWG_URL_GAMES}?key=${RAWG_API_KEY}`);
+const postGame = async (data) => {
+    if (await newGameDataIsValid(data)) {
+        data.idGame = await newGameID();
 
-    return data;
+        const gameCreated = await Game.create(data);
+
+        gameCreated.addGenres(data.genres);
+        gameCreated.addPlatforms(data.platforms);
+
+        return gameCreated;
+    }
 };
 
-module.exports = postVideogame;
+module.exports = postGame;
