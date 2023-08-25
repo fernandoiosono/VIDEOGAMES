@@ -15,31 +15,31 @@ defineGame(database);
 defineGenre(database);
 definePlatform(database);
 
-const { Games, Genres, Platforms } = database.models;
+const { Game, Genre, Platform } = database.models;
 
-Games.belongsToMany(Genres, { 
-    through: "GamesGenres",
+Game.belongsToMany(Genre, { 
+    through: "GameGenre",
     foreignKey: "idGame",
     otherKey: "idGenre",
     timestamps: false
 });
 
-Genres.belongsToMany(Games, { 
-    through: "GamesGenres",
+Genre.belongsToMany(Game, { 
+    through: "GameGenre",
     foreignKey: "idGenre",
     otherKey: "idGame",
     timestamps: false
 });
 
-Games.belongsToMany(Platforms, { 
-    through: "GamesPlatforms",
+Game.belongsToMany(Platform, { 
+    through: "GamePlatform",
     foreignKey: "idGame",
     otherKey: "idPlatform",
     timestamps: false
 });
 
-Platforms.belongsToMany(Games, { 
-    through: "GamesPlatforms",
+Platform.belongsToMany(Game, { 
+    through: "GamePlatform",
     foreignKey: "idPlatform",
     otherKey: "idGame",
     timestamps: false
