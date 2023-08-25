@@ -1,12 +1,12 @@
 require('dotenv').config();
 const axios = require('axios');
 const { Op } = require('sequelize');
-const { Game, GameGenre, Genre } = require('../../database/database.js');
+const { Game, Genre } = require('../../database/database.js');
 
-const { RAWG_URL_GAMES, RAWG_API_KEY } = process.env;
+const { RAWG_URL_GAMES, RAWG_API_KEY, QTY_GAMES_BYNAME } = process.env;
 
 const getGamesByName = async (name) => {
-    let countGames = 15;
+    let countGames = QTY_GAMES_BYNAME;
     const arrGames = [];
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -15,37 +15,23 @@ const getGamesByName = async (name) => {
             name: {
                 [Op.iLike]: `%${name}%`
             }
-        }
+        },
+        include: [
+            { model: Genre, attributes: ['name'] }
+        ]
     });
 
     for (let x = 0; x < dataGames.length; x++) {
-        const arrGenres = [];
-        const dataGame = dataGames[x].dataValues;
+        const game = dataGames[x].dataValues;
 
-        const idGenres = await GameGenre.findAll({
-            where: { idGame: dataGame.idGame },
-            attributes: ['idGenre']
-        });
+        game.genres = game.Genres.map(genre => genre.dataValues.name);
 
-        for (let x = 0; x < idGenres.length; x++) {
-            const nameGenres = await Genre.findOne({
-                where: { idGenre: idGenres[x].dataValues.idGenre },
-                attributes: ['name']
-            });
-
-            arrGenres.push(nameGenres.dataValues.name);
-        }
-
-        const game = { id: dataGame.idGame, 
-            name: dataGame.name, 
-            image: dataGame.image,
-            rating: dataGame.rating,
-            genres: arrGenres };
+        delete game.Genres;
 
         arrGames.push(game);
     }
 
-    countGames -= dataGames.length;
+    countGames -= arrGames.length;
     
     // Get Games From API @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     let nextPage = `${RAWG_URL_GAMES}?key=${RAWG_API_KEY}&search=${name}`;
@@ -55,13 +41,13 @@ const getGamesByName = async (name) => {
 
         for (let x = 0; x < data.results.length; x++) {
             if (countGames){
-                const dataGame = data.results[x];
+                const obj = data.results[x];
     
-                const game = { id: dataGame.id, 
-                    name: dataGame.name, 
-                    image: dataGame.background_image,
-                    rating: dataGame.rating,
-                    genres: getArrNames(dataGame.genres, 'genre', 'api') };
+                const game = { id: obj.id, 
+                    name: obj.name, 
+                    image: obj.background_image,
+                    rating: obj.rating,
+                    genres: obj.genres.map(genre => genre.name) };
                 
                 arrGames.push(game);
                 countGames -= 1;
@@ -73,21 +59,9 @@ const getGamesByName = async (name) => {
         nextPage = data.next;
     } while (nextPage); // Soporta paginado, aun cuando cada página trae 20 por el momento
 
-    if (!arrGames.length) throw new Error('Game Not Found :(');
+    if (!arrGames.length) throw new Error('Games Not Found :(');
 
     return arrGames;
-};
-
-const getArrNames = (obj) => { // Get an Ordered Array of ID Genres
-    const arrIDs = [];
-
-    for (let x = 0; x < obj.length; x++) {
-        const name = obj[x].name;
-
-        arrIDs.push(name);
-    }
-
-    return arrIDs;
 };
 
 module.exports = getGamesByName;
