@@ -19,5 +19,7 @@ VALUES ('b19d597c-8f54-41ba-ba73-02299c1adf92', 12),
 SELECT * FROM public."Games";
 SELECT * FROM public."Genres";
 SELECT * FROM public."Platforms";
-SELECT * FROM public."GamesGenres";
-SELECT * FROM public."GamesPlatforms";
+SELECT * FROM public."GameGenre";
+SELECT * FROM public."GamePlatform";
+
+--DROP TABLE public."GamesGenres";
