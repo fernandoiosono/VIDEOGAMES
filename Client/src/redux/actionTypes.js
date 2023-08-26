@@ -1,0 +1,1 @@
+export const CLEAN_STATE = "CLEAN_STATE";
