@@ -1,9 +1,11 @@
+import FormNewGame from "./FormNewGame.jsx";
+import GameDetail from "./GameDetail.jsx";
 import Home from "./Home.jsx";
 import Landing from "./Landing.jsx";
-import PageNotFound from "./PageNotFound.jsx";
 
 export {
+    FormNewGame,
+    GameDetail,
     Home,
-    Landing,
-    PageNotFound
+    Landing
 };
