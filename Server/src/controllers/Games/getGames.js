@@ -11,6 +11,7 @@ const getGames = async () => {
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const dataGames = await Game.findAll({
+        attributes: ['idGame', 'name', 'image', 'rating'],
         include: [
             { model: Genre, attributes: ['name'] }
         ]

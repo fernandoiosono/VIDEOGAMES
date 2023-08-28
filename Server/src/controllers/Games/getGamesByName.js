@@ -11,6 +11,7 @@ const getGamesByName = async (name) => {
 
     // Get Games From DataBase @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const dataGames = await Game.findAll({
+        attributes: ['idGame', 'name', 'image', 'rating'],
         where: {
             name: {
                 [Op.iLike]: `%${name}%`
