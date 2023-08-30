@@ -22,4 +22,8 @@ SELECT * FROM public."Platforms";
 SELECT * FROM public."GameGenre";
 SELECT * FROM public."GamePlatform";
 
---DROP TABLE public."GamesGenres";
+--DROP TABLE public."Games";
+--DROP TABLE public."Genres";
+--DROP TABLE public."Platforms";
+--DROP TABLE public."GameGenre";
+--DROP TABLE public."GamePlatform";
