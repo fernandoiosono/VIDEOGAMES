@@ -1,9 +1,11 @@
 import App from "./App.jsx";
-import SearchBar from "./SearchBar.jsx";
-import ToolBar from "./ToolBar.jsx";
+import GameCards from "./GameCards.jsx";
+import Nav from "./Nav.jsx";
+import Search from "./Search.jsx";
 
 export {
     App,
-    SearchBar,
-    ToolBar
+    GameCards,
+    Nav,
+    Search
 };
