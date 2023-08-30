@@ -1,6 +1,10 @@
-// import * as actionType from "./actionTypes.js";
+import * as actionType from "./actionTypes.js";
 
 const initialState = {
+	navFather: "",
+	genres: [],
+	platforms: []
+	
 	// userIsAuth: false,
 	// allCharacters: [],
 	// characterDetail: {},
@@ -10,9 +14,17 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case actionType.USER_AUTHENTICATION:
-		// 	return { ...state,
-		// 		userIsAuth: action.payload };
+		case actionType.SET_NAV_FATHER:
+			return { ...state,
+				navFather: action.payload };
+
+		case actionType.SET_ALL_GENRES:
+			return { ...state,
+				genres: action.payload };
+
+		case actionType.SET_ALL_PLATFORMS:
+			return { ...state,
+				platforms: action.payload };
 
 		// case actionType.ADD_CHARACTER:
 		// 	return { ...state,
