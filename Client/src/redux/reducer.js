@@ -3,17 +3,18 @@ import * as actionType from "./actionTypes.js";
 const initialState = {
 	navFather: "",
 	genres: [],
-	platforms: []
-	
-	// userIsAuth: false,
-	// allCharacters: [],
-	// characterDetail: {},
-	// allFavorites: [],
-	// favorites: []
+	platforms: [],
+	allGames: [],
+	gamesByName: [],
+	gameDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionType.GET_GAMES_BY_NAME:
+			return { ...state,
+				gamesByName: action.payload };
+
 		case actionType.SET_NAV_FATHER:
 			return { ...state,
 				navFather: action.payload };

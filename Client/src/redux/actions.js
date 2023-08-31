@@ -2,7 +2,23 @@ import axios from "axios";
 import * as actionType from "./actionTypes.js";
 
 const { VITE_ROUTE_GET_GENRES,
-    VITE_ROUTE_GET_PLATFORMS } = import.meta.env;
+    VITE_ROUTE_GET_PLATFORMS,
+    VITE_ROUTE_GET_GAMES_BY_NAME } = import.meta.env;
+
+export const getGamesByName = (name) => {
+    return function (dispatch) {
+        axios.get(`${VITE_ROUTE_GET_GAMES_BY_NAME}=${name}`)
+            .then((data) => {
+                dispatch({
+                    type: actionType.GET_GAMES_BY_NAME,
+                    payload: data.data
+                });
+            })
+            .catch((error) => {
+                alert(error.response.data.error);
+            });
+    };
+};
 
 export const getAllGames = () => { // PENDING
     return { type: actionType.GET_ALL_GAMES }
