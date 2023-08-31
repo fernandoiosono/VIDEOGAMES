@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { 
 	NewGame,
-	GameDetail,
+	Detail,
 	Home, 
 	Landing } from "../views";
 
@@ -15,7 +15,7 @@ const App = () => {
 					<Route path="/" element={<Landing />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/newgame" element={<NewGame />} />
-					<Route path="/gamedetail/:id" element={<GameDetail />} />
+					<Route path="/gamedetail/:id" element={<Detail />} />
 				</Routes>
 			</main>
 		</SectionApp>
