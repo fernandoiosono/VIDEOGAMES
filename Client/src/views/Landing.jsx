@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAllGenres, setAllPlatforms } from "../redux/actions.js";
 
 const Landing = () => {
@@ -33,18 +33,21 @@ const H1Welcome = styled.h1`
 `;
 
 const ButtonHome = styled.button`
-    font-weight: bold;
-    border: 2px solid black;
-    border-radius: 5px;
-    height: 30px;
-    width: 100px;
-    box-shadow: 0 0 10px black;
+    height: 35px;
+	width: 100px;
+	border: none;
+	border-radius: 5px;
+	background-color: #886bde;
+	color: white;
+	font-weight: bold;
+	font-size: 11px;
+	margin-left: 10px;
+	box-shadow: 0 0 5px black;
 
-    &:hover {
-        box-shadow: 0 0 10px white;
-        background-color: white;
-        cursor: pointer;
-    }
+	&:hover { 
+		cursor: pointer;
+		box-shadow: 0 0 5px white;
+	}
 `;
 
 export default Landing;
