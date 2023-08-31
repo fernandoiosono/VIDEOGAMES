@@ -1,11 +1,21 @@
 import App from "./App.jsx";
 import GameCards from "./GameCards.jsx";
-import Nav from "./Nav.jsx";
-import Search from "./Search.jsx";
+import GameDetail from "./GameDetail.jsx";
+import GoBackButton from "./GoBackButton.jsx";
+import NavigationBar from "./NavigationBar.jsx";
+import NewGameButton from "./NewGameButton.jsx";
+import NewGameForm from "./NewGameForm.jsx";
+import SearchBar from "./SearchBar.jsx";
+import ToolBar from "./ToolBar.jsx";
 
 export {
     App,
     GameCards,
-    Nav,
-    Search
+    GameDetail,
+    GoBackButton,
+    NavigationBar,
+    NewGameButton,
+    NewGameForm,
+    SearchBar,
+    ToolBar
 };

@@ -1,11 +1,11 @@
-import NewGame from "./NewGame.jsx";
-import GameDetail from "./GameDetail.jsx";
+import Detail from "./Detail.jsx";
 import Home from "./Home.jsx";
 import Landing from "./Landing.jsx";
+import NewGame from "./NewGame.jsx";
 
 export {
-    NewGame,
-    GameDetail,
+    Detail,
     Home,
-    Landing
+    Landing,
+    NewGame
 };
