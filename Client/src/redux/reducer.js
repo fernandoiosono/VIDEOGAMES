@@ -2,8 +2,8 @@ import * as actionType from "./actionTypes.js";
 
 const initialState = {
 	navFather: "",
-	genres: [],
-	platforms: [],
+	allGenres: [],
+	allPlatforms: [],
 	allGames: [],
 	gamesByName: [],
 	gameDetail: {}
@@ -21,11 +21,11 @@ const rootReducer = (state = initialState, action) => {
 
 		case actionType.SET_ALL_GENRES:
 			return { ...state,
-				genres: action.payload };
+				allGenres: action.payload };
 
 		case actionType.SET_ALL_PLATFORMS:
 			return { ...state,
-				platforms: action.payload };
+				allPlatforms: action.payload };
 
 		// case actionType.ADD_CHARACTER:
 		// 	return { ...state,
