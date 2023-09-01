@@ -24,7 +24,7 @@ const App = () => {
 
 const SectionApp = styled.section`
 	text-align: center;
-	padding: 25px;
+	padding: 15px;
 `;
 
 export default App;
