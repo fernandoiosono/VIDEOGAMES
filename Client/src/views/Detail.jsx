@@ -8,8 +8,6 @@ const Detail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
 
-    alert(id);
-    
     useEffect(() => {
         dispatch(setNavFather('detail'));
         // dispatch(setCharacterDetail(id));

@@ -15,7 +15,6 @@ import NewGameForm from "./NewGame/NewGameForm.jsx";
 
 // Global
 import App from "./App.jsx";
-
 import NavigationBar from "./NavigationBar.jsx";
 
 export {
