@@ -4,21 +4,21 @@ import { useSelector } from "react-redux";
 import { ToolBar } from ".";
 
 const NavigationBar = () => {
-    return (<>
+    return (
         <Navigation>
-            <ArticleLinks>
-                <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
+            <ArticleTitle>
+                <Link to="/home">
                     <ImgIcon src="/icon.svg" alt="mainIcon" />
                 </Link>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
                     <H1>Game Universe</H1>
                 </Link>
-            </ArticleLinks>
+            </ArticleTitle>
             <ArticleToolBar>
                 <ToolBar />
             </ArticleToolBar>
         </Navigation>
-    </>);
+    );
 };
 
 const Navigation = styled.nav`
@@ -26,12 +26,14 @@ const Navigation = styled.nav`
     display: flex;
     align-items: center;
     font-weight: bold;
+
+    // Keep It For Design Testing
     /* background: rgba(255, 255, 255, 0.4); */
 `;
 
 const Article = styled.article` display: flex; `;
 
-const ArticleLinks = styled(Article)`
+const ArticleTitle = styled(Article)`
     width: 40%;
     justify-content: left;
 `;
@@ -42,7 +44,6 @@ const ArticleToolBar = styled(Article)`
 `;
 
 const ImgIcon = styled.img`
-    display: flex;
     height: 40px;
     margin-right: 10px;
     margin-bottom: 0px;
