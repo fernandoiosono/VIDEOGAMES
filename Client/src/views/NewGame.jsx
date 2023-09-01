@@ -12,6 +12,7 @@ const NewGame = () => {
 
     return (<>
         <NavigationBar />
+        <br />
         <NewGameForm />
     </>);
 };
