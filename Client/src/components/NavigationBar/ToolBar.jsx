@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SearchBar, NewGameButton, GoBackButton } from ".";
+import { SearchBar, NewGameButton, GoBackButton } from "..";
 
 const ToolBar = () => {
     const fatherView = useSelector((state) => state.navFather);

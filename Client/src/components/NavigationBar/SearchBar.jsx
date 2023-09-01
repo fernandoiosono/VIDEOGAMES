@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import { getGamesByName } from "../redux/actions.js";
+import { getGamesByName } from "../../redux/actions.js";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
