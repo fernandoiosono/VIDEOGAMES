@@ -23,8 +23,8 @@ const App = () => {
 };
 
 const SectionApp = styled.section`
-	text-align: center;
-	padding: 15px;
+	flex: 1;
+	margin: 20px;
 `;
 
 export default App;
