@@ -22,6 +22,7 @@ const Landing = () => {
 };
 
 const SectionLanding = styled.section`
+    text-align: center;
     padding-top: 30%;  
 `;
 
