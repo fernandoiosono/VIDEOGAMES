@@ -22,10 +22,13 @@ const NavigationBar = () => {
 };
 
 const Navigation = styled.nav`
-    border-radius: 5px;
-    display: flex;
+    border-radius: 5px;    
     align-items: center;
     font-weight: bold;
+    margin-bottom: 15px;
+
+    display: flex;
+    flex-direction: row;
 
     // Keep It For Design Testing
     /* background: rgba(255, 255, 255, 0.4); */
@@ -34,12 +37,11 @@ const Navigation = styled.nav`
 const Article = styled.article` display: flex; `;
 
 const ArticleTitle = styled(Article)`
-    width: 40%;
-    justify-content: left;
+    flex: 1;
 `;
 
 const ArticleToolBar = styled(Article)`
-    width: 60%;
+    flex: 2;
     justify-content: right;
 `;
 
