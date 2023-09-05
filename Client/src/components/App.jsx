@@ -23,8 +23,8 @@ const App = () => {
 };
 
 const SectionApp = styled.section`
-	flex: 1;
-	margin: 20px;
+	height: calc(100vh - 40px);
+	padding:20px;
 `;
 
 export default App;

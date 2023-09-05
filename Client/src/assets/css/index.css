@@ -1,10 +1,10 @@
-body {
+html, body { 
 	margin: 0;
-	height: 100vh;
+	padding: 0;
+	height: 100vh; 
+}
 
-	display: flex;
-	flex-direction: column;
-
+body {
 	background-size: cover;
 	background-attachment: fixed;
 	background-image: url("../img/wp/wallpaper.jpg");
