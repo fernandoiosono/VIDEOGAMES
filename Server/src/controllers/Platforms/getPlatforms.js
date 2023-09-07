@@ -14,7 +14,9 @@ const getPlatforms = async () => {
 
         for (let x = 0; x < data.results.length; x++) {
             const platform = data.results[x];
-            const obj = { idPlatform: platform.id, name: platform.name };
+            const obj = { idPlatform: platform.id, 
+                name: platform.name,
+                slug: platform.slug };
             
             arrPlatforms.push(obj);
         }
