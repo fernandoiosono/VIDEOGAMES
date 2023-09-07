@@ -1,5 +1,5 @@
 // NavigationBar Component
-import GoBackButton from "./NavigationBar/GoBackButton.jsx";
+import HomeButton from "./NavigationBar/HomeButton.jsx";
 import NewGameButton from "./NavigationBar/NewGameButton.jsx";
 import SearchBar from "./NavigationBar/SearchBar.jsx";
 import ToolBar from "./NavigationBar/ToolBar.jsx";
@@ -23,8 +23,8 @@ export {
     GameCards,
     SearchBar,
     GameDetail,
+    HomeButton,
     NewGameForm,
-    GoBackButton,
     NavigationBar,
     NewGameButton
 };
