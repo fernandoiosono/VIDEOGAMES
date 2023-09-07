@@ -14,7 +14,10 @@ const getGenres = async () => {
 
         for (let x = 0; x < data.results.length; x++) {
             const genre = data.results[x];
-            const obj = { idGenre: genre.id, name: genre.name };
+            
+            const obj = { idGenre: genre.id, 
+                name: genre.name, 
+                slug: genre.slug };
             
             arrGenres.push(obj);
         }
