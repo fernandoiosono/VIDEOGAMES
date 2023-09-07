@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const GoBackButton = () => {
+const HomeButton = () => {
 	const navigate = useNavigate();
 
     return (
-        <ButtonBack onClick={() => navigate(-1)}>Go Back</ButtonBack>
+        <ButtonBack onClick={() => navigate("/home")}>Home</ButtonBack>
     );
 };
 
@@ -14,8 +14,8 @@ const ButtonBack = styled.button`
 	width: 100px;
 	border: none;
 	border-radius: 5px;
-	background-color: #c13b24;
-	color: white;
+	background-color: #886bde;
+	color: black;
 	font-weight: bold;
 	font-size: 11px;
 	margin-left: 10px;
@@ -28,4 +28,4 @@ const ButtonBack = styled.button`
 	}
 `;
 
-export default GoBackButton;
+export default HomeButton;
