@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SearchBar, NewGameButton, GoBackButton } from "..";
+import { SearchBar, NewGameButton, HomeButton } from "..";
 
 const ToolBar = () => {
     const fatherView = useSelector((state) => state.navFather);
@@ -16,8 +16,8 @@ const ToolBar = () => {
             ) : null
         }
         {
-            fatherView === "home" || fatherView === "detail" || fatherView === "newGame" ? (
-                <GoBackButton />
+            fatherView === "detail" || fatherView === "newGame" ? (
+                <HomeButton />
             ) : null
         }
     </>);
