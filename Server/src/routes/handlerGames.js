@@ -27,7 +27,8 @@ router.get('/:id', errorHandler(async (req, res) => {
 }));
 
 router.post('/', errorHandler(async (req, res) => {
-    const { newGame } = req.body;
+    const newGame = req.body;
+
     const gameCreated = await postGame(newGame);
 
     res.status(200).json(gameCreated);
