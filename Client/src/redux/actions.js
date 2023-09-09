@@ -1,28 +1,41 @@
 import axios from "axios";
 import * as actionType from "./actionTypes.js";
 
-const { VITE_ROUTE_GET_GENRES,
-    VITE_ROUTE_GET_PLATFORMS,
-    VITE_ROUTE_GET_GAMES_BY_NAME } = import.meta.env;
+const { 
+    VITE_ROUTE_POST_GAME,
+    VITE_ROUTE_GET_GAMES,
+    VITE_ROUTE_GET_GENRES,
+    VITE_ROUTE_GET_PLATFORMS 
+} = import.meta.env;
 
-export const getGamesByName = (name) => {
+export const setAllGames = () => {
     return function (dispatch) {
-        axios.get(`${VITE_ROUTE_GET_GAMES_BY_NAME}=${name}`)
+        axios.get(VITE_ROUTE_GET_GAMES)
             .then((data) => {
                 dispatch({
-                    type: actionType.GET_GAMES_BY_NAME,
+                    type: actionType.SET_ALL_GAMES,
                     payload: data.data
                 });
             })
-            .catch((error) => {
-                alert(error.response.data.error);
+            .catch((error) => { 
+                alert(error.response.data.error); 
             });
     };
 };
 
-export const getAllGames = () => { // PENDING
-    return { type: actionType.GET_ALL_GAMES }
-}
+export const addNewGame = (game) => {
+    return async () => {
+        try {
+            await axios.post(VITE_ROUTE_POST_GAME, game);
+
+            alert('New Game Created Successfully');
+        } catch(error) {
+            alert(error.response.data.error);
+
+            throw error;
+        }
+    };
+};
 
 export const setNavFather = (father) => { // OK
     return {
@@ -61,95 +74,17 @@ export const setAllPlatforms = () => { // OK
     };
 };
 
-export const setGameDetail = () => { // PENDING
-    return { type: actionType.SET_GAME_DETAIL };
-};
-
-export const cleanState = () => { // PENDING
-	return { type: actionType.CLEAN_STATE };
-};
-
-export const cleanDetail = () => { // PENDING
-    return { type: actionType.CLEAN_DETAIL }
-};
-
-// export const setCharacterDetail = (id) => {
+// export const getGamesByName = (name) => {
 //     return function (dispatch) {
-//         fetch(urlInfoChar + id)
-//             .then((response) => response.json())
-//             .then((data) => 
+//         axios.get(`${VITE_ROUTE_GET_GAMES_BY_NAME}=${name}`)
+//             .then((data) => {
 //                 dispatch({
-//                     type: actionType.SET_CHARACTER_DETAIL,
-//                     payload: {
-//                         id: id,
-//                         name: data.name,
-//                         status: formatUnknown(data.status),
-//                         species: formatUnknown(data.species),
-//                         type: formatUnknown(data.type),
-//                         gender: formatUnknown(data.gender),
-//                         origin: formatUnknown(data.origin.name),
-//                         location: formatUnknown(data.location.name),
-//                         image: data.image,
-//                         created: formatUnknown(data.created)
-//                     }
-//                 })
-//             );
+//                     type: actionType.GET_GAMES_BY_NAME,
+//                     payload: data.data
+//                 });
+//             })
+//             .catch((error) => {
+//                 alert(error.response.data.error);
+//             });
 //     };
-// };
-
-// export const delCharacter = (id) => {
-//     return {
-//         type: actionType.DEL_CHARACTER,
-//         payload: id
-//     };
-// };
-
-// export const addFavorite = (id, name, image, gender) => {
-// 	const endPoint = "http://localhost:3001/rickandmorty/fav";
-// 	const character = { 
-// 		id: id, 
-// 		name: name, 
-// 		image: image, 
-// 		gender: gender 
-// 	}
-
-// 	return (dispatch) => {
-// 		axios.post(endPoint, character)
-// 			.then(({ data }) => {
-// 				return dispatch({
-// 					type: actionType.ADD_FAVORITE,
-// 					payload: data
-// 				});
-// 			})
-// 	}
-// 	// return {
-// 	// 	type: actionType.ADD_FAVORITE,
-// 	// 	payload: { 
-// 	// 		id: id, 
-// 	// 		name: name, 
-// 	// 		image: image, 
-// 	// 		gender: gender 
-// 	// 	}
-// 	// };
-// };
-
-// export const delFavorite = (id) => {
-// 	return {
-// 		type: actionType.DEL_FAVORITE,
-// 		payload: id
-// 	};
-// };
-
-// export const filterFavorites = (gender) => {
-// 	return {
-// 		type: actionType.FILTER_FAVORITES,
-// 		payload: gender
-// 	};
-// };
-
-// export const orderFavorites = (order) => {
-// 	return {
-// 		type: actionType.ORDER_FAVORITES,
-// 		payload: order
-// 	};
 // };
