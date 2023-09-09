@@ -12,13 +12,13 @@ const getGameByID = async (pID) => {
         const game = await Game.findOne({
             where: { idGame: pID },
             include: [
-                { model: Genre, attributes: ['name'] },
-                { model: Platform, attributes: ['name'] }
+                { model: Genre, attributes: ['idGenre'] },
+                { model: Platform, attributes: ['idPlatform'] }
             ]
         });
 
-        game.dataValues.genres = game.dataValues.Genres.map(genre => genre.dataValues.name);
-        game.dataValues.platforms = game.dataValues.Platforms.map(platform => platform.dataValues.name);
+        game.dataValues.genres = game.dataValues.Genres.map(genre => genre.dataValues.idGenre);
+        game.dataValues.platforms = game.dataValues.Platforms.map(platform => platform.dataValues.idPlatform);
 
         delete game.dataValues.Genres;
         delete game.dataValues.Platforms;
@@ -34,8 +34,8 @@ const getGameByID = async (pID) => {
             released: data.released,
             rating: data.rating,
             description: data.description,
-            genres: data.genres.map(genre => genre.name),
-            platforms: data.platforms.map(platform => platform.platform.name)
+            genres: data.genres.map(genre => genre.id),
+            platforms: data.platforms.map(platform => platform.platform.id)
         }
 
         return game;
