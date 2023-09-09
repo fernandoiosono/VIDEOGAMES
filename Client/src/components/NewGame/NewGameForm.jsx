@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import star from "../../assets/img/star.svg";
 import unstar from "../../assets/img/unstar.svg";
+import { addNewGame, setAllGames } from "../../redux/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllGenres, setAllPlatforms } from "../../redux/actions.js";
 import { errorNewGameForm, isValidURL, validateNewGameData } from "../../helpers";
@@ -12,6 +13,14 @@ const NewGameForm = () => {
     const allGenres = useSelector((state) => state.allGenres);
     const allPlatforms = useSelector((state) => state.allPlatforms);
 
+    const initGameData = { 
+        name: "", 
+        description: "", 
+        image: "", 
+        rating: 0, 
+        genres: [], 
+        platforms: [] };
+
     const [errors, setErrors] = useState({ 
         name: "", 
         description: "", 
@@ -20,13 +29,7 @@ const NewGameForm = () => {
         genres: "", 
         platforms: "" });
 
-	const [gameData, setGameData] = useState({ 
-        name: "", 
-        description: "", 
-        image: "", 
-        rating: 0, 
-        genres: [], 
-        platforms: [] });
+    const [gameData, setGameData] = useState(initGameData);
 
     const handleInputChange = (e) => { // Name, Description, Image URL
 		const property = e.target.name,
@@ -79,9 +82,15 @@ const NewGameForm = () => {
 		const errorForm = errorNewGameForm(gameData, errors);
 
 		if (!errorForm) {
-			// dispatch(userAuthentication(true));
-            
-            // navigate("/home");
+            dispatch(addNewGame(gameData))
+                .then(() => {
+                    dispatch(setAllGames());
+
+                    setGameData(initGameData);
+                })
+                .catch((error) => {
+                    
+                });
 		} else {
 			alert(errorForm);
 		}
@@ -117,7 +126,7 @@ const NewGameForm = () => {
                 <ArticleImg>
                     <TitleGroup>Image URL</TitleGroup>
                     <DivImage>
-                        <ImgGame src={gameData.image} alt="Inexistent URL" />
+                        <ImgGame src={gameData.image} />
                     </DivImage>
                     <FooterImage>
                         <TextAURL type="text" name="image" readOnly value={gameData.image} onChange={handleInputChange} />
@@ -323,17 +332,6 @@ const ImgGame = styled.img`
     border-radius: 5px;
     box-shadow: 0 0 5px black;
 `;
-
-// const InputURL = styled.input`
-//     height: 100px;
-//     border-radius: 3px;
-//     border: none;
-//     padding: 0 5px 0 5px;
-//     box-shadow: 0 0 5px black;
-//     font-size: 10px;
-    
-//     &:focus { outline: none; }
-// `;
 
 const TextAURL = styled.textarea`
     height: 100px;
