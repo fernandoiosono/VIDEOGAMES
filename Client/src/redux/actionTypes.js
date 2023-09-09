@@ -1,4 +1,7 @@
 export const SET_ALL_GAMES = "SET_ALL_GAMES";
 export const SET_NAV_FATHER = "SET_NAV_FATHER";
 export const SET_ALL_GENRES = "SET_ALL_GENRES";
+export const SET_GAME_DETAIL = "SET_GAME_DETAIL";
 export const SET_ALL_PLATFORMS = "SET_ALL_PLATFORMS";
+
+export const CLEAN_DETAIL = "CLEAN_DETAIL";
