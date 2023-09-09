@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import { getGamesByName } from "../../redux/actions.js";
+// import { getGamesByName } from "../../redux/actions.js";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
     let name;
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const inputSearch = useRef(null);
     
 	const cleanInput = () => {
@@ -18,7 +18,7 @@ const SearchBar = () => {
 	};
 
 	const handleSearch = () => {
-		dispatch(getGamesByName(name));
+		// dispatch(getGamesByName(name));
 
 		cleanInput(); // Clean de input no matter what happens before
 	};
