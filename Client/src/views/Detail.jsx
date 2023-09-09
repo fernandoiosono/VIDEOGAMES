@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
-import { setNavFather } from "../redux/actions.js";
-import { NavigationBar, GameDetail } from "../components";
+import { setNavFather, setGameDetail, cleanDetail } from "../redux/actions.js";
+import { NavigationBar, GameDetailForm } from "../components";
 
 const Detail = () => {
     const dispatch = useDispatch();
@@ -10,15 +11,24 @@ const Detail = () => {
 
     useEffect(() => {
         dispatch(setNavFather('detail'));
-        // dispatch(setCharacterDetail(id));
 
-        // return () => { dispatch(cleanDetail()); };
+        return () => { dispatch(cleanDetail()); };
+    }, []);
+
+    useEffect(() => {
+        dispatch(setGameDetail(id));
     }, [id]);
 
-    return (<>
-        <NavigationBar />
-        <GameDetail />
-    </>);
+    return (
+        <SectionView>
+            <NavigationBar />
+            <GameDetailForm />
+        </SectionView>
+    );
 };
+
+const SectionView = styled.div`
+    height: calc(100vh - 40px);
+`;
 
 export default Detail;
