@@ -2,15 +2,29 @@ import axios from "axios";
 import * as actionType from "./actionTypes.js";
 
 const { 
-    VITE_ROUTE_POST_GAME,
-    VITE_ROUTE_GET_GAMES,
+    VITE_ROUTE_GAMES,
     VITE_ROUTE_GET_GENRES,
-    VITE_ROUTE_GET_PLATFORMS 
+    VITE_ROUTE_GET_PLATFORMS
 } = import.meta.env;
+
+export const setGameDetail = (id) => {
+    return function (dispatch) {
+        axios.get(`${VITE_ROUTE_GAMES}/${id}`)
+            .then((data) => {
+                dispatch({
+                    type: actionType.SET_GAME_DETAIL,
+                    payload: data.data
+                });
+            })
+            .catch((error) => {
+                alert(error.response.data.error);
+            });
+    };
+};
 
 export const setAllGames = () => {
     return function (dispatch) {
-        axios.get(VITE_ROUTE_GET_GAMES)
+        axios.get(`${VITE_ROUTE_GAMES}/all`)
             .then((data) => {
                 dispatch({
                     type: actionType.SET_ALL_GAMES,
@@ -26,7 +40,7 @@ export const setAllGames = () => {
 export const addNewGame = (game) => {
     return async () => {
         try {
-            await axios.post(VITE_ROUTE_POST_GAME, game);
+            await axios.post(VITE_ROUTE_GAMES, game);
 
             alert('New Game Created Successfully');
         } catch(error) {
@@ -72,6 +86,10 @@ export const setAllPlatforms = () => { // OK
                 alert(error.response.data.error); 
             });
     };
+};
+
+export const cleanDetail = () => {
+    return { type: actionType.CLEAN_DETAIL };
 };
 
 // export const getGamesByName = (name) => {
