@@ -1,14 +1,23 @@
 import * as actionType from "./actionTypes.js";
 
 const initialState = {
-	allGames: [],
 	navFather: "",
+	allGames: [],
 	allGenres: [],
-	allPlatforms: []
+	allPlatforms: [],
+	gameDetail: {}
 };
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionType.SET_GAME_DETAIL:
+			return { ...state,
+				gameDetail: action.payload };
+
+		case actionType.CLEAN_DETAIL:
+			return { ...state,
+				gameDetail: {} };
+
 		case actionType.SET_ALL_GAMES:
 			return { ...state,
 				allGames: action.payload };
