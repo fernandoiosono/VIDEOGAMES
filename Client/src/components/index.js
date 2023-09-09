@@ -5,7 +5,7 @@ import SearchBar from "./NavigationBar/SearchBar.jsx";
 import ToolBar from "./NavigationBar/ToolBar.jsx";
 
 // Detail View
-import GameDetail from "./Detail/GameDetail.jsx";
+import GameDetailForm from "./Detail/GameDetailForm.jsx";
 
 // Home View
 import GameCards from "./Home/GameCards.jsx";
@@ -22,9 +22,9 @@ export {
     ToolBar,
     GameCards,
     SearchBar,
-    GameDetail,
     HomeButton,
     NewGameForm,
     NavigationBar,
-    NewGameButton
+    NewGameButton,
+    GameDetailForm
 };
