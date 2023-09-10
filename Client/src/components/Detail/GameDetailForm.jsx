@@ -156,7 +156,7 @@ const DivImage = styled(Div)`
 const DivReleased = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 10px  
+    gap: 10px;
 `;
 
 const DivScroll = styled(Div)`
