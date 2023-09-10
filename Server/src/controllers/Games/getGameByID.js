@@ -17,6 +17,8 @@ const getGameByID = async (pID) => {
             ]
         });
 
+        if (!game) throw new Error("The Game with the ID Entered Doesn't Exist");
+
         game.dataValues.genres = game.dataValues.Genres.map(genre => genre.dataValues.idGenre);
         game.dataValues.platforms = game.dataValues.Platforms.map(platform => platform.dataValues.idPlatform);
 
