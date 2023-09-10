@@ -124,17 +124,6 @@ const HiddenAside = styled.aside`
     grid-gap: 10px;
 `;
 
-const ArticleChecks = styled.article`
-    padding: 10px;
-    overflow: hidden;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-
-    display: grid;
-    grid-template-rows: auto 1fr;
-    grid-gap: 10px;
-`;
-
 const TitleGroup = styled.p`
     margin: 0;
     color: white;
@@ -199,6 +188,14 @@ const TextArea = styled.textarea`
     &:focus { outline: none; }
 `;
 
+const TextAName = styled(TextArea)`
+    height: 70px;
+`;
+
+const TextADescription = styled(TextArea)`
+    font-size: 12px;
+`;
+
 const TextAURL = styled(TextArea)`
     height: 60px;
     font-size: 10px;
@@ -211,12 +208,15 @@ const TextAReleased = styled(TextArea)`
     text-align: center;
 `;
 
-const TextAName = styled(TextArea)`
-    height: 70px;
-`;
+const ArticleChecks = styled.article`
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
 
-const TextADescription = styled(TextArea)`
-    font-size: 12px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-gap: 10px;
 `;
 
 const CheckBox = styled.input`
