@@ -17,7 +17,10 @@ export const setGameDetail = (id) => {
                 });
             })
             .catch((error) => {
-                alert(error.response.data.error);
+                const handledError = error.response.data.error;
+                alert((handledError === "(RAWG): undefined") 
+                    ? handledError.replace('undefined', "The Game with the ID Entered Doesn't Exist")
+                    : handledError);
             });
     };
 };
