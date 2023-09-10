@@ -106,10 +106,10 @@ const NewGameForm = () => {
         <FormNewGame onSubmit={handleSubmit}>
             <MainAside>
                 <TitleGroup>Name</TitleGroup>
-                <TextAName name="name" value={gameData.name} onChange={handleInputChange} />
+                <TextAName name="name" value={gameData.name} onChange={handleInputChange} autoComplete="off" />
                 <PError>{errors.name}</PError>
                 <TitleGroup>Description</TitleGroup>
-                <TextADescription name="description" value={gameData.description} onChange={handleInputChange} />
+                <TextADescription name="description" value={gameData.description} onChange={handleInputChange} autoComplete="off"/>
                 <PError>{errors.description}</PError>
                 <TitleGroup>Rating</TitleGroup>
                 <DivRating>
@@ -129,7 +129,7 @@ const NewGameForm = () => {
                         <ImgGame src={gameData.image} />
                     </DivImage>
                     <FooterImage>
-                        <TextAURL type="text" name="image" readOnly value={gameData.image} onChange={handleInputChange} />
+                        <TextAURL type="text" name="image" readOnly value={gameData.image} onChange={handleInputChange} autoComplete="off" />
                         <ButtonPaste type="button" onClick={handlePasteClipboard}>Paste</ButtonPaste>
                     </FooterImage>
                     <PError>{errors.image}</PError>
@@ -139,32 +139,36 @@ const NewGameForm = () => {
                 <ArticleGen>
                     <TitleGroup>Genres</TitleGroup>
                     <DivScroll>
-                        {allGenres.map(({idGenre, name, slug}) => (<>
-                            <input type="checkbox" 
-                                key={slug} 
-                                id={`genres-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
-                                value={idGenre}
-                                checked={gameData.genres.includes(idGenre)}
-                                onChange={handleCheckChange} />
-                            <label htmlFor={`genre-${slug}`}>{name}</label>
-                            <br />
-                        </>))}
+                        {allGenres.map(({idGenre, name, slug}) => (
+                            <div key={`chkgenre-${slug}`}>
+                                <input type="checkbox" 
+                                    // key={slug} 
+                                    id={`genres-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
+                                    value={idGenre}
+                                    checked={gameData.genres.includes(idGenre)}
+                                    onChange={handleCheckChange} />
+                                <label htmlFor={`genres-${slug}`}>{name}</label>
+                                <br />
+                            </div>
+                        ))}
                     </DivScroll>
                     <PError>{errors.genres}</PError>
                 </ArticleGen>
                 <ArticleGen>
                     <TitleGroup>Platforms</TitleGroup>
                     <DivScroll>    
-                        {allPlatforms.map(({idPlatform, name, slug}) => (<>
-                            <input type="checkbox" 
-                                key={slug} 
-                                id={`platforms-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
-                                value={idPlatform}
-                                checked={gameData.platforms.includes(idPlatform)}
-                                onChange={handleCheckChange} />
-                            <label htmlFor={`platform-${slug}`}>{name}</label>
-                            <br />
-                        </>))}
+                        {allPlatforms.map(({idPlatform, name, slug}) => (
+                            <div key={`chkplatform-${slug}`}>
+                                <input type="checkbox" 
+                                    // key={slug} 
+                                    id={`platforms-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
+                                    value={idPlatform}
+                                    checked={gameData.platforms.includes(idPlatform)}
+                                    onChange={handleCheckChange} />
+                                <label htmlFor={`platforms-${slug}`}>{name}</label>
+                                <br />
+                            </div>
+                        ))}
                     </DivScroll>
                     <PError>{errors.platforms}</PError>
                 </ArticleGen>
