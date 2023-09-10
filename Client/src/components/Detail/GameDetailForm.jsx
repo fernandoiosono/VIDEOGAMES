@@ -45,6 +45,10 @@ const GameDetailForm = () => {
                         <ImgGame src={gameData.image} />
                     </DivImage>
                     <TextAURL readOnly name="image" defaultValue={gameData.image} autoComplete="off"/>
+                    <DivReleased>
+                        <TitleGroup>Released</TitleGroup>
+                        <TextAReleased readOnly name="released" defaultValue={gameData.released} autoComplete="off"/>
+                    </DivReleased>
                 </ArticleImg>
             </AsideLeft>
             <AsideRight>
@@ -131,7 +135,7 @@ const Article = styled.article`
 `;
 
 const ArticleImg = styled(Article)`
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
 `;
 
 const ArticleGen = styled(Article)`
@@ -171,6 +175,12 @@ const DivImage = styled.div`
     box-shadow: 0 0 5px black;
 `;
 
+const DivReleased = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px  
+`;
+
 const DivScroll = styled.div`
     padding: 10px;
     overflow: auto;
@@ -194,7 +204,21 @@ const ImgGame = styled.img`
 `;
 
 const TextAURL = styled.textarea`
-    height: 100px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: 0 0 5px black;
+    padding: 10px;
+    font-size: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+
+    &:focus { outline: none; }
+`;
+
+const TextAReleased = styled.textarea`
+    height: 11px;
+    width: 100%;
     border: none;
     border-radius: 5px;
     resize: none;
