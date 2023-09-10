@@ -24,7 +24,7 @@ const GameDetailForm = () => {
 
     return (
         <FormNewGame>
-            <MainAside>
+            <LeftAside>
                 <TitleGroup>Name</TitleGroup>
                 <TextAName readOnly name="name" defaultValue={gameData.name} autoComplete="off" />
                 <TitleGroup>Description</TitleGroup>
@@ -37,22 +37,20 @@ const GameDetailForm = () => {
                     <ImgRating src={(gameData.rating >= 4) ? star : unstar} alt="rating4" />
                     <ImgRating src={(gameData.rating >= 5) ? star : unstar} alt="rating5" />
                 </DivRating>
-            </MainAside>
-            <AsideLeft>
-                <ArticleImg>
-                    <TitleGroup>Image URL</TitleGroup>
-                    <DivImage>
-                        <ImgGame src={gameData.image} />
-                    </DivImage>
-                    <TextAURL readOnly name="image" defaultValue={gameData.image} autoComplete="off"/>
-                    <DivReleased>
-                        <TitleGroup>Released</TitleGroup>
-                        <TextAReleased readOnly name="released" defaultValue={gameData.released} autoComplete="off"/>
-                    </DivReleased>
-                </ArticleImg>
-            </AsideLeft>
-            <AsideRight>
-                <ArticleGen>
+            </LeftAside>
+            <CenterAside>
+                <TitleGroup>Image URL</TitleGroup>
+                <DivImage>
+                    <ImgGame src={gameData.image} />
+                </DivImage>
+                <TextAURL readOnly name="image" defaultValue={gameData.image} autoComplete="off"/>
+                <DivReleased>
+                    <TitleGroup>Released</TitleGroup>
+                    <TextAReleased readOnly name="released" defaultValue={gameData.released} autoComplete="off"/>
+                </DivReleased>
+            </CenterAside>
+            <HiddenAside>
+                <ArticleChecks>
                     <TitleGroup>Genres</TitleGroup>
                     <DivScroll>
                         {allGenres.map(({idGenre, name, slug}) => (
@@ -67,8 +65,8 @@ const GameDetailForm = () => {
                             </div>
                         ))}
                     </DivScroll>
-                </ArticleGen>
-                <ArticleGen>
+                </ArticleChecks>
+                <ArticleChecks>
                     <TitleGroup>Platforms</TitleGroup>
                     <DivScroll>    
                         {allPlatforms.map(({idPlatform, name, slug}) => (
@@ -83,8 +81,8 @@ const GameDetailForm = () => {
                         </div>
                         ))}
                     </DivScroll>
-                </ArticleGen>
-            </AsideRight>
+                </ArticleChecks>
+            </HiddenAside>
         </FormNewGame>
     );
 };
@@ -99,50 +97,45 @@ const FormNewGame = styled.form`
     grid-gap: 10px;
 `;
 
-const MainAside = styled.main`
+const DisplayedAside = styled.aside`
+    overflow: hidden;
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
 
     display: grid;
-    grid-template-rows: auto auto auto 1fr auto auto;
     grid-gap: 10px;
 `;
 
-const Aside = styled.aside`
+const LeftAside = styled(DisplayedAside)`
+    grid-template-rows: auto auto auto 1fr auto auto;
+`;
+
+const CenterAside = styled(DisplayedAside)`
+    grid-template-rows: auto 1fr auto auto;
+`;
+
+const HiddenAside = styled.aside`
     overflow: hidden;
     background-color: transparent;
 
     display: grid;
+    grid-template-rows: repeat(2, 1fr);
     grid-gap: 10px;
 `;
 
-const AsideLeft = styled(Aside)`
-    grid-template-rows: 1fr;
-`;
-
-const AsideRight = styled(Aside)`
-    grid-template-rows: repeat(2, 1fr);
-`;
-
-const Article = styled.article`
+const ArticleChecks = styled.article`
     padding: 10px;
     overflow: hidden;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
+
     display: grid;
+    grid-template-rows: auto 1fr;
     grid-gap: 10px;
 `;
 
-const ArticleImg = styled(Article)`
-    grid-template-rows: auto 1fr auto auto;
-`;
-
-const ArticleGen = styled(Article)`
-    grid-template-rows: auto 1fr;
-`;
-
-const Paragraph = styled.p`
+const TitleGroup = styled.p`
     margin: 0;
     color: white;
     font-size: 20px;
@@ -150,29 +143,25 @@ const Paragraph = styled.p`
     font-weight: bold;
 `;
 
-const TitleGroup = styled(Paragraph)``;
+const Div = styled.div`
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    background-color: rgba(255, 255, 255, 0.7);
+`;
 
-const DivRating = styled.div`
+const DivRating = styled(Div)`
     padding: 20px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.7);
-
+    justify-content: center;
+    
     display: flex;
     flex-direction: row;
     gap: 15px;
-    justify-content: center;
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
-const DivImage = styled.div`
+const DivImage = styled(Div)`
     padding: 10px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.7);
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
 const DivReleased = styled.div`
@@ -181,13 +170,9 @@ const DivReleased = styled.div`
     gap: 10px  
 `;
 
-const DivScroll = styled.div`
+const DivScroll = styled(Div)`
     padding: 10px;
     overflow: auto;
-    background-color: rgba(255, 255, 255, 0.7);
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
 const ImgRating = styled.img`
@@ -203,54 +188,35 @@ const ImgGame = styled.img`
     box-shadow: 0 0 5px black;
 `;
 
-const TextAURL = styled.textarea`
+const TextArea = styled.textarea`
+    resize: none;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    background-color: rgba(255, 255, 255, 0.7);
+
+    &:focus { outline: none; }
+`;
+
+const TextAURL = styled(TextArea)`
     height: 60px;
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
     font-size: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-
-    &:focus { outline: none; }
 `;
 
-const TextAReleased = styled.textarea`
-    height: 11px;
+const TextAReleased = styled(TextArea)`
+    height: 14px;
     width: 100%;
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
-    font-size: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-
-    &:focus { outline: none; }
+    font-size: 12px;
+    text-align: center;
 `;
 
-const TextAName = styled.textarea`
+const TextAName = styled(TextArea)`
     height: 70px;
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-
-    &:focus { outline: none; }
 `;
 
-const TextADescription = styled.textarea`
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-
-    &:focus { outline: none; }
+const TextADescription = styled(TextArea)`
+    font-size: 12px;
 `;
 
 const CheckBox = styled.input`
