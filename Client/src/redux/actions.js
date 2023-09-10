@@ -91,18 +91,3 @@ export const setAllPlatforms = () => { // OK
 export const cleanDetail = () => {
     return { type: actionType.CLEAN_DETAIL };
 };
-
-// export const getGamesByName = (name) => {
-//     return function (dispatch) {
-//         axios.get(`${VITE_ROUTE_GET_GAMES_BY_NAME}=${name}`)
-//             .then((data) => {
-//                 dispatch({
-//                     type: actionType.GET_GAMES_BY_NAME,
-//                     payload: data.data
-//                 });
-//             })
-//             .catch((error) => {
-//                 alert(error.response.data.error);
-//             });
-//     };
-// };
