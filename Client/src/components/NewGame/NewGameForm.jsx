@@ -104,7 +104,7 @@ const NewGameForm = () => {
 
     return (
         <FormNewGame onSubmit={handleSubmit}>
-            <MainAside>
+            <LeftAside>
                 <TitleGroup>Name</TitleGroup>
                 <TextAName name="name" value={gameData.name} onChange={handleInputChange} autoComplete="off" />
                 <PError>{errors.name}</PError>
@@ -121,28 +121,25 @@ const NewGameForm = () => {
                 </DivRating>
                 <PError>{errors.rating}</PError>
                 <ButtonSave type="submit">Save</ButtonSave>
-            </MainAside>
-            <AsideLeft>
-                <ArticleImg>
-                    <TitleGroup>Image URL</TitleGroup>
-                    <DivImage>
-                        <ImgGame src={gameData.image} />
-                    </DivImage>
-                    <FooterImage>
-                        <TextAURL type="text" name="image" readOnly value={gameData.image} onChange={handleInputChange} autoComplete="off" />
-                        <ButtonPaste type="button" onClick={handlePasteClipboard}>Paste</ButtonPaste>
-                    </FooterImage>
-                    <PError>{errors.image}</PError>
-                </ArticleImg>
-            </AsideLeft>
-            <AsideRight>
-                <ArticleGen>
+            </LeftAside>
+            <CenterAside>
+                <TitleGroup>Image URL</TitleGroup>
+                <DivImage>
+                    <ImgGame src={gameData.image} />
+                </DivImage>
+                <FooterURL>
+                    <TextAURL type="text" name="image" readOnly value={gameData.image} onChange={handleInputChange} autoComplete="off" />
+                    <ButtonPaste type="button" onClick={handlePasteClipboard}>Paste</ButtonPaste>
+                </FooterURL>
+                <PError>{errors.image}</PError>
+            </CenterAside>
+            <HiddenAside>
+                <ArticleChecks>
                     <TitleGroup>Genres</TitleGroup>
                     <DivScroll>
                         {allGenres.map(({idGenre, name, slug}) => (
                             <div key={`chkgenre-${slug}`}>
                                 <input type="checkbox" 
-                                    // key={slug} 
                                     id={`genres-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
                                     value={idGenre}
                                     checked={gameData.genres.includes(idGenre)}
@@ -153,14 +150,13 @@ const NewGameForm = () => {
                         ))}
                     </DivScroll>
                     <PError>{errors.genres}</PError>
-                </ArticleGen>
-                <ArticleGen>
+                </ArticleChecks>
+                <ArticleChecks>
                     <TitleGroup>Platforms</TitleGroup>
                     <DivScroll>    
                         {allPlatforms.map(({idPlatform, name, slug}) => (
                             <div key={`chkplatform-${slug}`}>
                                 <input type="checkbox" 
-                                    // key={slug} 
                                     id={`platforms-${slug}`} // Don´t Change This Structure (handleCheckChange > type Variable)
                                     value={idPlatform}
                                     checked={gameData.platforms.includes(idPlatform)}
@@ -171,8 +167,8 @@ const NewGameForm = () => {
                         ))}
                     </DivScroll>
                     <PError>{errors.platforms}</PError>
-                </ArticleGen>
-            </AsideRight>
+                </ArticleChecks>
+            </HiddenAside>
         </FormNewGame>
     );
 };
@@ -187,95 +183,34 @@ const FormNewGame = styled.form`
     grid-gap: 10px;
 `;
 
-const MainAside = styled.main`
+const DisplayedAside = styled.aside`
+    overflow: hidden;
     padding: 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
 
     display: grid;
-    grid-template-rows: auto auto auto auto 1fr auto auto auto auto auto;
     grid-gap: 10px;
 `;
 
-const ButtonSave = styled.button`
-	height: 35px;
-	width: 100%;
-	border: none;
-	border-radius: 5px;
-	background-color: green;
-	color: white;
-	font-weight: bold;
-	font-size: 11px;
-	box-shadow: 0 0 5px black;
-	text-shadow: 0 0 15px white;
-    margin: 0 auto;
-
-	&:hover { 
-		cursor: pointer;
-		box-shadow: 0 0 5px white;
-	}
+const LeftAside = styled(DisplayedAside)`
+    grid-template-rows: auto auto auto auto 1fr auto auto auto auto auto;
 `;
 
-const PError = styled.p`
-	font-size: 10px;
-	background-color: #c52727;
-	color: white;
-	margin: 0;
-    border-radius: 2px;
-    text-align: center;
+const CenterAside = styled(DisplayedAside)`
+    grid-template-rows: auto 1fr auto auto;
 `;
 
-const ButtonPaste = styled.button`
-    width: 60px;
-	border: none;
-	border-radius: 5px;
-	background-color: #4d6bda;
-	color: white;
-	font-weight: bold;
-	font-size: 10px;
-	box-shadow: 0 0 5px black;
-	text-shadow: 0 0 15px white;
-
-	&:hover { 
-		cursor: pointer;
-		box-shadow: 0 0 5px white;
-	}
-`;
-
-const Aside = styled.aside`
+const HiddenAside = styled.aside`
     overflow: hidden;
     background-color: transparent;
 
     display: grid;
-    grid-gap: 10px;
-`;
-
-const AsideLeft = styled(Aside)`
-    grid-template-rows: 1fr;
-`;
-
-const AsideRight = styled(Aside)`
     grid-template-rows: repeat(2, 1fr);
-`;
-
-const Article = styled.article`
-    padding: 10px;
-    overflow: hidden;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: grid;
     grid-gap: 10px;
 `;
 
-const ArticleImg = styled(Article)`
-    grid-template-rows: auto 1fr auto auto;
-`;
-
-const ArticleGen = styled(Article)`
-    grid-template-rows: auto 1fr auto;
-`;
-
-const Paragraph = styled.p`
+const TitleGroup = styled.p`
     margin: 0;
     color: white;
     font-size: 20px;
@@ -283,44 +218,30 @@ const Paragraph = styled.p`
     font-weight: bold;
 `;
 
-const TitleGroup = styled(Paragraph)``;
-
-const FooterImage = styled.footer`    
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-gap: 10px;
+const Div = styled.div`
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    background-color: rgba(255, 255, 255, 0.7);
 `;
 
-const DivRating = styled.div`
+const DivRating = styled(Div)`
     padding: 20px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.7);
-
+    justify-content: center;
+    
     display: flex;
     flex-direction: row;
     gap: 15px;
-    justify-content: center;
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
-const DivImage = styled.div`
+const DivImage = styled(Div)`
     padding: 10px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.7);
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
-const DivScroll = styled.div`
+const DivScroll = styled(Div)`
     padding: 10px;
     overflow: auto;
-    background-color: rgba(255, 255, 255, 0.7);
-    
-    border-radius: 5px;
-    box-shadow: 0 0 5px black;
 `;
 
 const ImgRating = styled.img`
@@ -337,40 +258,81 @@ const ImgGame = styled.img`
     box-shadow: 0 0 5px black;
 `;
 
-const TextAURL = styled.textarea`
-    height: 100px;
+const FooterURL = styled.footer`    
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 10px;
+`;
+
+const TextArea = styled.textarea`
+    resize: none;
+    padding: 10px;
     border: none;
     border-radius: 5px;
-    resize: none;
     box-shadow: 0 0 5px black;
-    padding: 10px;
-    font-size: 10px;
     background-color: rgba(255, 255, 255, 0.7);
 
     &:focus { outline: none; }
 `;
 
-const TextAName = styled.textarea`
+const TextAName = styled(TextArea)`
     height: 70px;
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-
-    &:focus { outline: none; }
 `;
 
-const TextADescription = styled.textarea`
-    border: none;
-    border-radius: 5px;
-    resize: none;
-    box-shadow: 0 0 5px black;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
+const TextADescription = styled(TextArea)`
+    font-size: 12px;
+`;
 
-    &:focus { outline: none; }
+const TextAURL = styled(TextArea)`
+    height: 60px;
+    font-size: 10px;
+`;
+
+const ArticleChecks = styled.article`
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 10px;
+`;
+
+const Button = styled.button`
+    border: none;
+	border-radius: 5px;
+    box-shadow: 0 0 5px black;
+
+    color: white;
+    font-size: 11px;
+	font-weight: bold;
+    text-shadow: 0 0 15px white;
+
+    &:hover { 
+		cursor: pointer;
+		box-shadow: 0 0 5px white;
+	}
+`;
+
+const ButtonSave = styled(Button)`
+    width: 100%;
+	height: 35px;
+	background-color: green;
+`;
+
+const ButtonPaste = styled(Button)`
+    width: 60px;
+	background-color: #4d6bda;
+`;
+
+const PError = styled.p`
+	font-size: 10px;
+	background-color: #c52727;
+	color: white;
+	margin: 0;
+    border-radius: 2px;
+    text-align: center;
 `;
 
 export default NewGameForm;

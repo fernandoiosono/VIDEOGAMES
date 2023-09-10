@@ -138,6 +138,12 @@ const Div = styled.div`
     background-color: rgba(255, 255, 255, 0.7);
 `;
 
+const DivReleased = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+`;
+
 const DivRating = styled(Div)`
     padding: 20px;
     overflow: hidden;
@@ -151,12 +157,6 @@ const DivRating = styled(Div)`
 const DivImage = styled(Div)`
     padding: 10px;
     overflow: hidden;
-`;
-
-const DivReleased = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
 `;
 
 const DivScroll = styled(Div)`
