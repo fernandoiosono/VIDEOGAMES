@@ -27,11 +27,18 @@ const SearchBar = () => {
 		if (e.key === "Enter") handleSearch();
 	};
 
-	return (<>
-        <InputName id="inputName" ref={inputSearch} type="search" onChange={handleChangeName} onKeyDown={handleKeyDown} autoFocus />
-        <ButtonSearch onClick={handleSearch}>Look It For!</ButtonSearch>
-    </>);
+	return (
+		<ArticleComponent>
+			<InputName id="inputName" ref={inputSearch} type="search" onChange={handleChangeName} onKeyDown={handleKeyDown} autoFocus />
+			<ButtonSearch onClick={handleSearch}>Look It For!</ButtonSearch>
+		</ArticleComponent>
+    );
 };
+
+const ArticleComponent = styled.section`
+	display: flex;
+	flex-direction: row;
+`;
 
 const InputName = styled.input`
 	height: 35px;
