@@ -26,14 +26,14 @@ const ToolBar = () => {
                     : null
             }
             {
-                fatherView === "home" || fatherView === "detail" ? (
-                    <NewGameButton />
-                ) : null
+                fatherView === "home" || fatherView === "detail" 
+                    ? ( <NewGameButton /> ) 
+                    : null
             }
             {
-                fatherView === "detail" || fatherView === "newGame" ? (
-                    <HomeButton />
-                ) : null
+                fatherView === "detail" || fatherView === "newGame" 
+                    ? ( <HomeButton /> ) 
+                    : null
             }
         </SectionView>
     );
