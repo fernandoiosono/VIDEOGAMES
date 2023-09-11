@@ -5,11 +5,11 @@ const HomeButton = () => {
 	const navigate = useNavigate();
 
     return (
-        <ButtonBack onClick={() => navigate("/home")}>Home</ButtonBack>
+        <ButtonHome onClick={() => navigate("/home")}>Go Home</ButtonHome>
     );
 };
 
-const ButtonBack = styled.button`
+const ButtonHome = styled.button`
 	height: 35px;
 	width: 100px;
 	border: none;
@@ -18,7 +18,6 @@ const ButtonBack = styled.button`
 	color: black;
 	font-weight: bold;
 	font-size: 11px;
-	margin-left: 10px;
 	box-shadow: 0 0 5px black;
 	text-shadow: 0 0 15px white;
 

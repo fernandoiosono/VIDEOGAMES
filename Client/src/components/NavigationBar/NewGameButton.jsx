@@ -18,7 +18,6 @@ const ButtonNew = styled.button`
 	color: white;
 	font-weight: bold;
 	font-size: 11px;
-	margin-left: 10px;
 	box-shadow: 0 0 5px black;
 	text-shadow: 0 0 15px white;
 
