@@ -11,7 +11,7 @@ const NavigationBar = () => {
                     <ImgIcon src="/icon.svg" alt="mainIcon" />
                 </Link>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
-                    <H1>Game Universe</H1>
+                    <H1SiteTitle>Game Universe</H1SiteTitle>
                 </Link>
             </ArticleTitle>
             <ArticleToolBar>
@@ -22,22 +22,21 @@ const NavigationBar = () => {
 };
 
 const Navigation = styled.nav`
+    margin: 0;
     border-radius: 5px;    
-    align-items: center;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     display: flex;
     flex-direction: row;
-
-    // Keep It For Design Testing
-    /* background: rgba(255, 255, 255, 0.4); */
 `;
 
 const Article = styled.article` display: flex; `;
 
 const ArticleTitle = styled(Article)`
     flex: 1;
+    align-items: center;
+    gap: 10px;
 `;
 
 const ArticleToolBar = styled(Article)`
@@ -47,18 +46,13 @@ const ArticleToolBar = styled(Article)`
 
 const ImgIcon = styled.img`
     height: 40px;
-    margin-right: 10px;
-    margin-bottom: 0px;
+    
 `;
 
-const H1 = styled.h1`
-    margin-top: 7px;
-    margin-bottom: 0px;
-    height: 25px;
-    font-size: 33px;
-    display: flex;
-    align-items: center;
+const H1SiteTitle = styled.h1`
+    margin: 0;
     color: white;
+    font-size: 33px;
     text-shadow: 0 0 10px black;
 `;
 
