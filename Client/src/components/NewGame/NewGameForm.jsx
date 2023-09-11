@@ -183,14 +183,22 @@ const FormNewGame = styled.form`
     grid-gap: 10px;
 `;
 
-const DisplayedAside = styled.aside`
+const Aside = styled.aside`
     overflow: hidden;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
 
     display: grid;
     grid-gap: 10px;
+`;
+
+const DisplayedAside = styled(Aside)`
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const HiddenAside = styled(Aside)`
+    background-color: transparent;
+    grid-template-rows: repeat(2, 1fr);
 `;
 
 const LeftAside = styled(DisplayedAside)`
@@ -199,15 +207,6 @@ const LeftAside = styled(DisplayedAside)`
 
 const CenterAside = styled(DisplayedAside)`
     grid-template-rows: auto 1fr auto auto;
-`;
-
-const HiddenAside = styled.aside`
-    overflow: hidden;
-    background-color: transparent;
-
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 10px;
 `;
 
 const TitleGroup = styled.p`
