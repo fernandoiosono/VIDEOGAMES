@@ -31,6 +31,15 @@ const NewGameForm = () => {
 
     const [gameData, setGameData] = useState(initGameData);
 
+    const submitDisabled = (
+        !gameData.name ||
+        !gameData.description ||
+        !gameData.image ||
+        !gameData.rating ||
+        !gameData.genres.length ||
+        !gameData.platforms.length
+    );
+
     const handleInputChange = (e) => { // Name, Description, Image URL
 		const property = e.target.name,
 			value = e.target.value;
@@ -120,7 +129,7 @@ const NewGameForm = () => {
                     <ImgRating src={(gameData.rating >= 5) ? star : unstar} alt="rating5" onClick={() => handleRatingChange(5)} />
                 </DivRating>
                 <PError>{errors.rating}</PError>
-                <ButtonSave type="submit">Save</ButtonSave>
+                <ButtonSave type="submit" disabled={submitDisabled}>Save</ButtonSave>
             </LeftAside>
             <CenterAside>
                 <TitleGroup>Image URL</TitleGroup>
@@ -318,6 +327,11 @@ const ButtonSave = styled(Button)`
     width: 100%;
 	height: 35px;
 	background-color: green;
+
+    &:disabled {
+        pointer-events: none;
+        background-color: gray;
+    }
 `;
 
 const ButtonPaste = styled(Button)`
