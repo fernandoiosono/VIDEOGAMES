@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setAllGenres, setAllPlatforms } from "../redux/actions.js";
 
 const Landing = () => {
