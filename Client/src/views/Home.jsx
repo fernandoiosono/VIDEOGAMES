@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { styled } from "styled-components";
+import { setNavFather } from "../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllGames, setNavFather } from "../redux/actions.js";
 import { NavigationBar, GameCards } from "../components";
 
 const Home = () => {
@@ -9,13 +10,18 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(setNavFather('home'));
-        dispatch(setAllGames());
     }, []);
 
-    return (<>
-        <NavigationBar />
-        <GameCards />
-    </>);
+    return (
+        <SectionView>
+            <NavigationBar />
+            <GameCards />
+        </SectionView>
+    );
 };
+
+const SectionView = styled.section`
+    height: calc(100vh - 40px);
+`;
 
 export default Home;
