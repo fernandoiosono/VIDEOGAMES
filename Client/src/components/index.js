@@ -8,6 +8,7 @@ import ToolBar from "./NavigationBar/ToolBar.jsx";
 import GameDetailForm from "./Detail/GameDetailForm.jsx";
 
 // Home View
+import GameCard from "./Home/GameCard.jsx";
 import GameCards from "./Home/GameCards.jsx";
 
 // NewGame View
@@ -20,6 +21,7 @@ import NavigationBar from "./NavigationBar.jsx";
 export {
     App,
     ToolBar,
+    GameCard,
     GameCards,
     SearchBar,
     HomeButton,
