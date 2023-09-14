@@ -1,15 +1,23 @@
 import * as actionType from "./actionTypes.js";
 
 const initialState = {
-	navFather: "",
 	allGames: [],
 	allGenres: [],
 	allPlatforms: [],
-	gameDetail: {}
+
+	lastPage : 0,
+	navFather: "",
+	gameDetail: {},
+	filteredGames: []
 };
 
 const rootReducer = (state = initialState, action) => {
+	console.log(action);
 	switch (action.type) {
+		case actionType.SET_LAST_PAGE:
+			return { ...state,
+				lastPage: action.payload };
+
 		case actionType.SET_GAME_DETAIL:
 			return { ...state,
 				gameDetail: action.payload };

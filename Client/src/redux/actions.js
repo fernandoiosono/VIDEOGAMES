@@ -54,14 +54,14 @@ export const addNewGame = (game) => {
     };
 };
 
-export const setNavFather = (father) => { // OK
+export const setNavFather = (father) => {
     return {
         type: actionType.SET_NAV_FATHER,
         payload: father
     };
 };
 
-export const setAllGenres = () => { // OK
+export const setAllGenres = () => {
     return function (dispatch) {
         axios.get(VITE_ROUTE_GET_GENRES)
             .then((data) => {
@@ -76,7 +76,7 @@ export const setAllGenres = () => { // OK
     };
 };
 
-export const setAllPlatforms = () => { // OK
+export const setAllPlatforms = () => {
     return function (dispatch) {
         axios.get(VITE_ROUTE_GET_PLATFORMS)
             .then((data) => {
@@ -93,4 +93,11 @@ export const setAllPlatforms = () => { // OK
 
 export const cleanDetail = () => {
     return { type: actionType.CLEAN_DETAIL };
+};
+
+export const setLastPage = (page) => {
+    return { 
+        type: actionType.SET_LAST_PAGE,
+        payload: page
+    };
 };
