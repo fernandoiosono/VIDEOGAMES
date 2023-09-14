@@ -2,21 +2,24 @@ import { styled } from "styled-components";
 import { GameCard } from "../../components";
 import { useEffect, useState } from "react";
 import { divideGamesIntoPages } from "../../helpers";
-import { setAllGames } from "../../redux/actions.js";
+import { setAllGames, setLastPage } from "../../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const gamesPerPage = parseInt(import.meta.env.VITE_GAMES_PER_PAGE);
 
 const GameCards = () => {
     const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(0);
+    const lastPage = useSelector((state) => state.lastPage)
     const allGames = useSelector((state) => state.allGames);
+
+    const [currentPage, setCurrentPage] = useState(lastPage);
 
     const totalPages = Math.ceil(allGames.length / gamesPerPage);
     const paginatedGames = divideGamesIntoPages(allGames, gamesPerPage);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
+        dispatch(setLastPage(newPage));
     };
 
     useEffect(() => {
