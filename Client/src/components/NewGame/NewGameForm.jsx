@@ -1,25 +1,19 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import star from "../../assets/img/star.svg";
+import { useNavigate } from "react-router-dom";
 import unstar from "../../assets/img/unstar.svg";
-import { addNewGame, setAllGames } from "../../redux/actions.js";
+import { addNewGame, setAllGames, setLastPage } from "../../redux/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 import { setAllGenres, setAllPlatforms } from "../../redux/actions.js";
 import { errorNewGameForm, isValidURL, validateNewGameData } from "../../helpers";
 
 const NewGameForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const allGenres = useSelector((state) => state.allGenres);
     const allPlatforms = useSelector((state) => state.allPlatforms);
-
-    const initGameData = { 
-        name: "", 
-        description: "", 
-        image: "", 
-        rating: 0, 
-        genres: [], 
-        platforms: [] };
 
     const [errors, setErrors] = useState({ 
         name: "", 
@@ -29,7 +23,13 @@ const NewGameForm = () => {
         genres: "", 
         platforms: "" });
 
-    const [gameData, setGameData] = useState(initGameData);
+    const [gameData, setGameData] = useState({ 
+        name: "", 
+        description: "", 
+        image: "", 
+        rating: 0, 
+        genres: [], 
+        platforms: [] });
 
     const submitDisabled = (
         !gameData.name ||
@@ -93,9 +93,10 @@ const NewGameForm = () => {
 		if (!errorForm) {
             dispatch(addNewGame(gameData))
                 .then(() => {
+                    // Carga el Catálogo General y se Posiciona en la Primera Página para Ver el Nuevo Juego
                     dispatch(setAllGames());
-
-                    setGameData(initGameData);
+                    dispatch(setLastPage(0));
+                    navigate("/home");
                 })
                 .catch((error) => {
                     
