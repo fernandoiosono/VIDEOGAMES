@@ -9,3 +9,4 @@ export const SET_GAMES_BY_NAME = "SET_GAMES_BY_NAME";
 
 
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const CLEAN_SEARCH = "CLEAN_SEARCH";

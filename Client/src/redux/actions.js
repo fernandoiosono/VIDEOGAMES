@@ -110,6 +110,10 @@ export const cleanDetail = () => {
     return { type: actionType.CLEAN_DETAIL };
 };
 
+export const cleanSearch = () => {
+    return { type: actionType.CLEAN_SEARCH };
+};
+
 export const setLastPage = (page) => {
     return { 
         type: actionType.SET_LAST_PAGE,

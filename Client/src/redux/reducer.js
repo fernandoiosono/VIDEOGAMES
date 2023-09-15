@@ -15,6 +15,10 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionType.CLEAN_SEARCH:
+			return { ...state,
+				homeGames: state.allGames };
+
 		case actionType.SET_GAMES_BY_NAME:
 			return { ...state,
 				homeGames: action.payload };
