@@ -33,7 +33,8 @@ const rootReducer = (state = initialState, action) => {
 
 		case actionType.SET_ALL_GAMES:
 			return { ...state,
-				allGames: action.payload };
+				allGames: action.payload,
+				homeGames: action.payload };
 
 		case actionType.SET_NAV_FATHER:
 			return { ...state,
