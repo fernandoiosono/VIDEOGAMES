@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { GameCard } from "../../components";
 import { useEffect, useState } from "react";
 import { divideGamesIntoPages } from "../../helpers";
-import { setAllGames, setLastPage } from "../../redux/actions.js";
+import { setLastPage, cleanSearch } from "../../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const gamesPerPage = parseInt(import.meta.env.VITE_GAMES_PER_PAGE);
@@ -10,20 +10,24 @@ const gamesPerPage = parseInt(import.meta.env.VITE_GAMES_PER_PAGE);
 const GameCards = () => {
     const dispatch = useDispatch();
     const lastPage = useSelector((state) => state.lastPage)
-    const allGames = useSelector((state) => state.allGames);
+    const homeGames = useSelector((state) => state.homeGames);
 
     const [currentPage, setCurrentPage] = useState(lastPage);
 
-    const totalPages = Math.ceil(allGames.length / gamesPerPage);
-    const paginatedGames = divideGamesIntoPages(allGames, gamesPerPage);
+    const totalPages = Math.ceil(homeGames.length / gamesPerPage);
+    const paginatedGames = divideGamesIntoPages(homeGames, gamesPerPage);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
         dispatch(setLastPage(newPage));
     };
 
+    const handleCleanSearch = () => {
+        dispatch(cleanSearch());
+    };
+
     useEffect(() => {
-        if (!allGames.length) dispatch(setAllGames());
+        
     }, []);
 
     return (
@@ -34,26 +38,34 @@ const GameCards = () => {
                         <GameCard key={ index } args={ item } />
                     ))}
                 </MainCards>
-                <FooterCards>
-                    <ButtonDirection disabled={ currentPage === 0 } onClick={ () => { handlePageChange(currentPage - 1) } }>Previous</ButtonDirection>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <ButtonNumber key={ index } onClick={ () => { handlePageChange(index) } } disabled={ currentPage === index }>
-                            { index + 1 }
-                        </ButtonNumber>
-                    ))}
-                    <ButtonDirection disabled={ currentPage === totalPages - 1 } onClick={ () => { handlePageChange(currentPage + 1) } }>Next</ButtonDirection>
-                </FooterCards>
+                {
+                    homeGames.length === 15 // It's a Name Search
+                        ? ( 
+                            <ButtonResetSearch onClick={ () => { handleCleanSearch() } }>Show All Games Again</ButtonResetSearch> 
+                        )
+                        : (
+                            <FooterCards>
+                                <ButtonDirection disabled={ currentPage === 0 } onClick={ () => { handlePageChange(currentPage - 1) } }>Previous</ButtonDirection>
+                                {Array.from({ length: totalPages }, (_, index) => (
+                                    <ButtonNumber key={ index } onClick={ () => { handlePageChange(index) } } disabled={ currentPage === index }>
+                                        { index + 1 }
+                                    </ButtonNumber>
+                                ))}
+                                <ButtonDirection disabled={ currentPage === totalPages - 1 } onClick={ () => { handlePageChange(currentPage + 1) } }>Next</ButtonDirection>
+                            </FooterCards>
+                        )
+                }
             </DisplayedAside>
             <HiddenAside>
                 <ArticleFilters>
                     <TitleGroup>Filtrar</TitleGroup>
                     <MainControls />
-                    <ButtonReset>Reset Filters</ButtonReset>
+                    <ButtonResetFilters>Reset Filters</ButtonResetFilters>
                 </ArticleFilters>
                 <ArticleFilters>
                     <TitleGroup>Ordenar</TitleGroup>
                     <MainControls />
-                    <ButtonReset>Reset Order</ButtonReset>
+                    <ButtonResetFilters>Reset Order</ButtonResetFilters>
                 </ArticleFilters>
             </HiddenAside>
         </SectionGameCards>
@@ -149,8 +161,12 @@ const ButtonNumber = styled(Button)`
 	background-color: #3fc383;
 `;
 
-const ButtonReset = styled(Button)`
+const ButtonResetFilters = styled(Button)`
     width: 100%;
+	background-color: #e33535;
+`;
+
+const ButtonResetSearch = styled(Button)`
 	background-color: #e33535;
 `;
 
@@ -164,8 +180,6 @@ const ArticleFilters = styled.article`
     grid-gap: 10px;
 `;
 
-const MainControls = styled.main`
-    /* background-color: rgba(58, 74, 214, 0.5); */
-`
+const MainControls = styled.main``;
 
 export default GameCards;
