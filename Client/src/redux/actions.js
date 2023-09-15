@@ -7,6 +7,21 @@ const {
     VITE_ROUTE_GET_PLATFORMS
 } = import.meta.env;
 
+export const setGamesByName = (name) => {
+    return function (dispatch) {
+        axios.get(`${VITE_ROUTE_GAMES}/name?name=${name}`)
+            .then((data) => {
+                dispatch({
+                    type: actionType.SET_GAMES_BY_NAME,
+                    payload: data.data
+                });
+            })
+            .catch((error) => {
+                alert(error.response.data.error);
+            });
+    };
+};
+
 export const setGameDetail = (id) => {
     return function (dispatch) {
         axios.get(`${VITE_ROUTE_GAMES}/${id}`)

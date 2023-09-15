@@ -5,6 +5,7 @@ export const SET_ALL_PLATFORMS = "SET_ALL_PLATFORMS";
 export const SET_LAST_PAGE = "SET_LAST_PAGE";
 export const SET_NAV_FATHER = "SET_NAV_FATHER";
 export const SET_GAME_DETAIL = "SET_GAME_DETAIL";
+export const SET_GAMES_BY_NAME = "SET_GAMES_BY_NAME";
 
 
 export const CLEAN_DETAIL = "CLEAN_DETAIL";

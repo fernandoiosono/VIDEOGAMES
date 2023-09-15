@@ -5,15 +5,20 @@ const initialState = {
 	allGenres: [],
 	allPlatforms: [],
 
+	homeGames: [],
+	filteredGames: [],
+
 	lastPage : 0,
 	navFather: "",
-	gameDetail: {},
-	filteredGames: []
+	gameDetail: {}	
 };
 
 const rootReducer = (state = initialState, action) => {
-	console.log(action);
 	switch (action.type) {
+		case actionType.SET_GAMES_BY_NAME:
+			return { ...state,
+				homeGames: action.payload };
+
 		case actionType.SET_LAST_PAGE:
 			return { ...state,
 				lastPage: action.payload };
