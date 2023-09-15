@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setAllGenres, setAllPlatforms } from "../redux/actions.js";
+import { setAllGames, setAllGenres, setAllPlatforms } from "../redux/actions.js";
 
 const Landing = () => {
     const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Landing = () => {
     useEffect(() => {
         dispatch(setAllGenres());
         dispatch(setAllPlatforms());
+        dispatch(setAllGames());
     }, []);
 
     return (
