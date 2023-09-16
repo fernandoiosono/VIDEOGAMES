@@ -6,7 +6,7 @@ import * as viewCaption from "../../views/viewCaptions.js";
 const ToolBar = () => {
     const currentView = useSelector((state) => state.currentView);
 
-    const caption = currentView.caption + ((!currentView.payload) ? "" : currentView.payload);
+    const caption = currentView.caption + ((!currentView.payload) ? "" : "' " + currentView.payload + " '");
 
     return (
         <SectionView>
