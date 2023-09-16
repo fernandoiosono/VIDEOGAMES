@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+const { VITE_NO_IMAGE } = import.meta.env;
+
 const GameCard = (props) => {
     const navigate = useNavigate();
     const { idGame, name, image, rating, genres } = props.args;
@@ -10,8 +12,8 @@ const GameCard = (props) => {
     };
 
     return (
-        <Card key={ idGame } $imageurl={ image } onClick={ () => handleClick(idGame) }>
-                <PName>{ name }</PName>
+        <Card key={ idGame } $imageurl={ (image) ? image : VITE_NO_IMAGE } onClick={ () => handleClick(idGame) }>
+            <PName>{ name }</PName>
         </Card>
     );
 };
