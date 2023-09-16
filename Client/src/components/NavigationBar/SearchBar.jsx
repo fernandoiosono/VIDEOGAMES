@@ -1,26 +1,21 @@
-import { useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { setGamesByName } from "../../redux/actions.js";
 
 const SearchBar = () => {
-    let name;
     const dispatch = useDispatch();
-    const inputSearch = useRef(null);
-    
-	const cleanInput = () => {
-        inputSearch.current.value = "";
-		inputSearch.current.focus();
-	};
+
+	const [ name, setName ] = useState('');
 
 	const handleChangeName = (e) => {
-		name = e.target.value;
+		setName(e.target.value);
 	};
 
 	const handleSearch = () => {
 		dispatch(setGamesByName(name))
 			.then(() => {
-				cleanInput();		
+				setName('');
 			})
 			.catch((error) => {
 				
@@ -33,7 +28,12 @@ const SearchBar = () => {
 
 	return (
 		<ArticleComponent>
-			<InputName id="inputName" ref={inputSearch} type="search" onChange={handleChangeName} onKeyDown={handleKeyDown} autoFocus />
+			<InputName autoFocus
+				id="inputName" 
+				type="search" 
+				value={name}
+				onChange={handleChangeName} 
+				onKeyDown={handleKeyDown} />
 			<ButtonSearch onClick={handleSearch}>Look It For!</ButtonSearch>
 		</ArticleComponent>
     );
