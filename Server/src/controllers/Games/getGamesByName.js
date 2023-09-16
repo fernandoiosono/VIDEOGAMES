@@ -44,7 +44,7 @@ const getGamesByName = async (name) => {
             if (countGames){
                 const obj = data.results[x];
     
-                const game = { id: obj.id, 
+                const game = { idGame: obj.id, 
                     name: obj.name, 
                     image: obj.background_image,
                     rating: obj.rating,
