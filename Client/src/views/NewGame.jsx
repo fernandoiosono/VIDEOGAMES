@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
+import { NEW_GAME } from "./viewCaptions.js";
 import { setCurrentView } from "../redux/actions.js";
 import { NavigationBar, NewGameForm } from "../components";
 
@@ -8,7 +9,7 @@ const NewGame = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setCurrentView('newGame'));
+        dispatch(setCurrentView(NEW_GAME));
     }, []);
 
     return (

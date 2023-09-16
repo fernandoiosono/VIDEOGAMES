@@ -1,40 +1,36 @@
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { SearchBar, NewGameButton, HomeButton } from "..";
+import * as viewCaption from "../../views/viewCaptions.js";
 
 const ToolBar = () => {
-    let viewCaption = "";
     const currentView = useSelector((state) => state.currentView);
-    
-    switch (currentView) {
-        case "newGame":
-            viewCaption = "@ New Game Creation";
-            break;
-        case "detail":
-            viewCaption = "@ Game Detail";
-            break;
-        default:
-            viewCaption = "Welcome Home!";
-    }
+
+    const caption = currentView.caption + ((!currentView.payload) ? "" : currentView.payload);
 
     return (
         <SectionView>
-            <PCaption>{viewCaption}</PCaption>
-            {
-                currentView === "home" 
-                    ? ( <SearchBar /> ) 
-                    : null
-            }
-            {
-                currentView === "home" || currentView === "detail" 
-                    ? ( <NewGameButton /> ) 
-                    : null
-            }
-            {
-                currentView === "detail" || currentView === "newGame" 
-                    ? ( <HomeButton /> ) 
-                    : null
-            }
+            <PCaption>{caption}</PCaption>
+            {(() => {
+                switch (true) {
+                    case currentView.caption === viewCaption.HOME || currentView.caption === viewCaption.GAME_SEARCH:
+                        return (<>
+                            <SearchBar />
+                            <NewGameButton />
+                        </>);
+                    case currentView.caption === viewCaption.GAME_DETAIL:
+                        return (<>
+                            <NewGameButton />
+                            <HomeButton />
+                        </>);
+                    case currentView.caption === viewCaption.NEW_GAME:
+                        return (<>
+                            <HomeButton />
+                        </>);
+                    default:
+                        return null;
+                };
+            })()}
         </SectionView>
     );
 };
@@ -50,6 +46,7 @@ const PCaption = styled.p`
     color: white;  
     text-shadow: 0 0 10px black;
     margin-right: 10px;
+    font-size: 11px;
 `;
 
 export default ToolBar;

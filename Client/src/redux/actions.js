@@ -71,10 +71,10 @@ export const addNewGame = (game) => {
     };
 };
 
-export const setCurrentView = (view) => {
+export const setCurrentView = (caption, payload = "") => {
     return {
         type: actionType.SET_CURRENT_VIEW,
-        payload: view
+        payload: { caption: caption, payload: payload }
     };
 };
 

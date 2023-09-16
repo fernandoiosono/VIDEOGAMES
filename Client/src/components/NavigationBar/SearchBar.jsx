@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { setGamesByName } from "../../redux/actions.js";
+import { GAME_SEARCH } from "../../views/viewCaptions.js";
+import { setGamesByName, setCurrentView } from "../../redux/actions.js";
 
 const SearchBar = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const SearchBar = () => {
 	const handleSearch = () => {
 		dispatch(setGamesByName(name))
 			.then(() => {
-				setName('');
+				dispatch(setCurrentView(GAME_SEARCH, name));
+
+				setName('');				
 			})
 			.catch((error) => {
 				

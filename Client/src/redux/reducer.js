@@ -1,4 +1,5 @@
 import * as actionType from "./actionTypes.js";
+import * as viewCaption from "../views/viewCaptions.js";
 
 const initialState = {
 	allGames: [],
@@ -10,14 +11,19 @@ const initialState = {
 
 	lastPage : 0,
 	gameDetail: {},
-	currentView: ""
+
+	currentView: {
+		caption: "",
+		payload: ""
+	}
 };
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionType.CLEAN_SEARCH:
 			return { ...state,
-				homeGames: state.allGames };
+				homeGames: state.allGames,
+				currentView: { caption: viewCaption.HOME, payload: "" } };
 
 		case actionType.SET_GAMES_BY_NAME:
 			return { ...state,

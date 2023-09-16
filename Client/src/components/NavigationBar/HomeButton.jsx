@@ -5,7 +5,7 @@ const HomeButton = () => {
 	const navigate = useNavigate();
 
     return (
-        <ButtonHome onClick={() => navigate("/home")}>Go Home</ButtonHome>
+        <ButtonHome onClick={() => navigate("/home")}>Home</ButtonHome>
     );
 };
 

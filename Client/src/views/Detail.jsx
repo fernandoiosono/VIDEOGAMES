@@ -2,15 +2,17 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
+import { GAME_DETAIL } from "./viewCaptions.js";
 import { setCurrentView, setGameDetail, cleanDetail } from "../redux/actions.js";
 import { NavigationBar, GameDetailForm } from "../components";
+
 
 const Detail = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(setCurrentView('detail'));
+        dispatch(setCurrentView(GAME_DETAIL, id.toString()));
 
         return () => { dispatch(cleanDetail()); };
     }, []);

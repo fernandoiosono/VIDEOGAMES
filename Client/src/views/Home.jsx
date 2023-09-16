@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { HOME } from "./viewCaptions.js";
 import { styled } from "styled-components";
 import { setAllGames, setCurrentView } from "../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,7 @@ const Home = () => {
     const allGames = useSelector((state) => state.allGames);
 
     useEffect(() => {
-        dispatch(setCurrentView('home'));
+        dispatch(setCurrentView(HOME));
 
         if (!allGames.length) dispatch(setAllGames());
     }, []);
