@@ -9,7 +9,7 @@ const gamesPerPage = parseInt(import.meta.env.VITE_GAMES_PER_PAGE);
 
 const GameCards = () => {
     const dispatch = useDispatch();
-    const lastPage = useSelector((state) => state.lastPage)
+    const lastPage = useSelector((state) => state.lastPage);
     const homeGames = useSelector((state) => state.homeGames);
 
     const [currentPage, setCurrentPage] = useState(lastPage);
@@ -26,20 +26,16 @@ const GameCards = () => {
         dispatch(cleanSearch());
     };
 
-    useEffect(() => {
-        
-    }, []);
-
     return (
         <SectionGameCards>
             <DisplayedAside>
                 <MainCards>
-                    {paginatedGames.length > 0 && paginatedGames[currentPage].map((item, index) => (
+                    {paginatedGames.length > 0 && paginatedGames[(paginatedGames.length === 1) ? 0 : currentPage].map((item, index) => (
                         <GameCard key={ index } args={ item } />
                     ))}
                 </MainCards>
                 {
-                    homeGames.length === 15 // It's a Name Search
+                    homeGames.length <= 15 // It's a Name Search
                         ? ( 
                             <ButtonResetSearch onClick={ () => { handleCleanSearch() } }>Show All Games Again</ButtonResetSearch> 
                         )
