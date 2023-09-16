@@ -14,15 +14,17 @@ const SearchBar = () => {
 	};
 
 	const handleSearch = () => {
-		dispatch(setGamesByName(name))
-			.then(() => {
-				dispatch(setCurrentView(GAME_SEARCH, name));
+		if (name) {
+			dispatch(setGamesByName(name))
+				.then(() => {
+					dispatch(setCurrentView(GAME_SEARCH, name));
 
-				setName('');				
-			})
-			.catch((error) => {
-				
-			});
+					setName('');				
+				})
+				.catch((error) => {
+					
+				});
+		} else alert('Please Enter Some Words to Look For!');
 	};
 
 	const handleKeyDown = (e) => {
