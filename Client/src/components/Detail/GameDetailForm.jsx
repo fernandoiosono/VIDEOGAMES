@@ -189,7 +189,7 @@ const TextArea = styled.textarea`
 `;
 
 const TextAName = styled(TextArea)`
-    height: 70px;
+    height: 40px;
 `;
 
 const TextADescription = styled(TextArea)`
