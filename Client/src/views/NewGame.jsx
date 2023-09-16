@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
-import { setNavFather } from "../redux/actions.js";
+import { setCurrentView } from "../redux/actions.js";
 import { NavigationBar, NewGameForm } from "../components";
 
 const NewGame = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setNavFather('newGame'));
+        dispatch(setCurrentView('newGame'));
     }, []);
 
     return (

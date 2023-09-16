@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
-import { setNavFather, setGameDetail, cleanDetail } from "../redux/actions.js";
+import { setCurrentView, setGameDetail, cleanDetail } from "../redux/actions.js";
 import { NavigationBar, GameDetailForm } from "../components";
 
 const Detail = () => {
@@ -10,7 +10,7 @@ const Detail = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(setNavFather('detail'));
+        dispatch(setCurrentView('detail'));
 
         return () => { dispatch(cleanDetail()); };
     }, []);

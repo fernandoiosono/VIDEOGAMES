@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import { setAllGames, setNavFather } from "../redux/actions.js";
+import { setAllGames, setCurrentView } from "../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { NavigationBar, GameCards } from "../components";
 
@@ -9,7 +9,7 @@ const Home = () => {
     const allGames = useSelector((state) => state.allGames);
 
     useEffect(() => {
-        dispatch(setNavFather('home'));
+        dispatch(setCurrentView('home'));
 
         if (!allGames.length) dispatch(setAllGames());
     }, []);

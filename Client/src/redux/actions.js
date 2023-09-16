@@ -71,10 +71,10 @@ export const addNewGame = (game) => {
     };
 };
 
-export const setNavFather = (father) => {
+export const setCurrentView = (view) => {
     return {
-        type: actionType.SET_NAV_FATHER,
-        payload: father
+        type: actionType.SET_CURRENT_VIEW,
+        payload: view
     };
 };
 

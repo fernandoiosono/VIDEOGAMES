@@ -3,8 +3,8 @@ export const SET_ALL_GENRES = "SET_ALL_GENRES";
 export const SET_ALL_PLATFORMS = "SET_ALL_PLATFORMS";
 
 export const SET_LAST_PAGE = "SET_LAST_PAGE";
-export const SET_NAV_FATHER = "SET_NAV_FATHER";
 export const SET_GAME_DETAIL = "SET_GAME_DETAIL";
+export const SET_CURRENT_VIEW = "SET_CURRENT_VIEW";
 export const SET_GAMES_BY_NAME = "SET_GAMES_BY_NAME";
 
 

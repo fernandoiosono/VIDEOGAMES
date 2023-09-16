@@ -9,8 +9,8 @@ const initialState = {
 	filteredGames: [],
 
 	lastPage : 0,
-	navFather: "",
-	gameDetail: {}	
+	gameDetail: {},
+	currentView: ""
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -40,9 +40,9 @@ const rootReducer = (state = initialState, action) => {
 				allGames: action.payload,
 				homeGames: action.payload };
 
-		case actionType.SET_NAV_FATHER:
+		case actionType.SET_CURRENT_VIEW:
 			return { ...state,
-				navFather: action.payload };
+				currentView: action.payload };
 
 		case actionType.SET_ALL_GENRES:
 			return { ...state,

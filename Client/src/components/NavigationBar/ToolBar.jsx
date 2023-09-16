@@ -4,9 +4,9 @@ import { SearchBar, NewGameButton, HomeButton } from "..";
 
 const ToolBar = () => {
     let viewCaption = "";
-    const fatherView = useSelector((state) => state.navFather);
+    const currentView = useSelector((state) => state.currentView);
     
-    switch (fatherView) {
+    switch (currentView) {
         case "newGame":
             viewCaption = "@ New Game Creation";
             break;
@@ -21,17 +21,17 @@ const ToolBar = () => {
         <SectionView>
             <PCaption>{viewCaption}</PCaption>
             {
-                fatherView === "home" 
+                currentView === "home" 
                     ? ( <SearchBar /> ) 
                     : null
             }
             {
-                fatherView === "home" || fatherView === "detail" 
+                currentView === "home" || currentView === "detail" 
                     ? ( <NewGameButton /> ) 
                     : null
             }
             {
-                fatherView === "detail" || fatherView === "newGame" 
+                currentView === "detail" || currentView === "newGame" 
                     ? ( <HomeButton /> ) 
                     : null
             }
