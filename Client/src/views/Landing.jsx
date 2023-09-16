@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAllGames, setAllGenres, setAllPlatforms } from "../redux/actions.js";
 
 const Landing = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const allGames = useSelector((state) => state.allGames);
 
     useEffect(() => {
         dispatch(setAllGenres());
@@ -17,7 +18,15 @@ const Landing = () => {
     return (
         <SectionLanding>
             <H1Welcome>Welcome To Game Universe!</H1Welcome>
-            <ButtonHome onClick={() => navigate("/home")}>Go Home</ButtonHome>
+            <ButtonHome 
+                disabled={!allGames.length > 0} 
+                onClick={() => navigate("/home")}>
+                    {
+                        allGames.length === 0
+                            ? "Loading..."
+                            : "Go Home!"
+                    }
+            </ButtonHome>
         </SectionLanding>
     );
 };
@@ -50,6 +59,11 @@ const ButtonHome = styled.button`
 		cursor: pointer;
 		box-shadow: 0 0 5px white;
 	}
+
+    &:disabled {
+        pointer-events: none;
+        background-color: gray;
+    }
 `;
 
 export default Landing;
