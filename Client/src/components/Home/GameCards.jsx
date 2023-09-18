@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
 import { GameCard } from "../../components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { divideGamesIntoPages } from "../../helpers";
 import { setLastPage, cleanSearch } from "../../redux/actions.js";
 import { useDispatch, useSelector } from "react-redux";
+import { Filtering, Ordering } from ".."
 
 const gamesPerPage = parseInt(import.meta.env.VITE_GAMES_PER_PAGE);
 
@@ -11,7 +12,7 @@ const GameCards = () => {
     const dispatch = useDispatch();
     const lastPage = useSelector((state) => state.lastPage);
     const homeGames = useSelector((state) => state.homeGames);
-
+    
     const [currentPage, setCurrentPage] = useState(lastPage);
 
     const totalPages = Math.ceil(homeGames.length / gamesPerPage);
@@ -41,28 +42,20 @@ const GameCards = () => {
                         )
                         : (
                             <FooterCards>
-                                <ButtonDirection disabled={ currentPage === 0 } onClick={ () => { handlePageChange(currentPage - 1) } }>Previous</ButtonDirection>
+                                <ButtonDirection disabled={ currentPage === 0 } onClick={ () => { handlePageChange(currentPage - 1) } }>⇐ ⇐ ⇐</ButtonDirection>
                                 {Array.from({ length: totalPages }, (_, index) => (
                                     <ButtonNumber key={ index } onClick={ () => { handlePageChange(index) } } disabled={ currentPage === index }>
                                         { index + 1 }
                                     </ButtonNumber>
                                 ))}
-                                <ButtonDirection disabled={ currentPage === totalPages - 1 } onClick={ () => { handlePageChange(currentPage + 1) } }>Next</ButtonDirection>
+                                <ButtonDirection disabled={ currentPage === totalPages - 1 } onClick={ () => { handlePageChange(currentPage + 1) } }>⇒ ⇒ ⇒</ButtonDirection>
                             </FooterCards>
                         )
                 }
             </DisplayedAside>
             <HiddenAside>
-                <ArticleFilters>
-                    <TitleGroup>Filtrar</TitleGroup>
-                    <MainControls />
-                    <ButtonResetFilters>Reset Filters</ButtonResetFilters>
-                </ArticleFilters>
-                <ArticleFilters>
-                    <TitleGroup>Ordenar</TitleGroup>
-                    <MainControls />
-                    <ButtonResetFilters>Reset Order</ButtonResetFilters>
-                </ArticleFilters>
+                <Filtering />
+                <Ordering />
             </HiddenAside>
         </SectionGameCards>
     );
@@ -96,14 +89,6 @@ const HiddenAside = styled(Aside)`
     grid-template-rows: repeat(2, 1fr);
 `;
 
-const TitleGroup = styled.p`
-    margin: 0;
-    color: white;
-    font-size: 20px;
-    text-shadow: 0 0 5px black;
-    font-weight: bold;
-`;
-
 const MainCards = styled.main`
     padding: 10px;
     max-width: 100%;
@@ -130,10 +115,9 @@ const Button = styled.button`
 	border-radius: 5px;
     box-shadow: 0 0 5px black;
 
-    color: white;
     font-size: 11px;
 	font-weight: bold;
-    text-shadow: 0 0 15px black;
+    text-shadow: 0 0 10px black;
 
     &:hover { 
 		cursor: pointer;
@@ -149,33 +133,19 @@ const Button = styled.button`
 
 const ButtonDirection = styled(Button)`
     width: 100px;
+    color: white;
 	background-color: #4d6bda;
 `;
 
 const ButtonNumber = styled(Button)`
     width: 50px;
-	background-color: #3fc383;
-`;
-
-const ButtonResetFilters = styled(Button)`
-    width: 100%;
-	background-color: #e33535;
+    color: black;
+	background-color: #ffffff;
 `;
 
 const ButtonResetSearch = styled(Button)`
+    color: white;
 	background-color: #e33535;
 `;
-
-const ArticleFilters = styled.article`
-    padding: 10px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-gap: 10px;
-`;
-
-const MainControls = styled.main``;
 
 export default GameCards;
