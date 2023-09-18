@@ -61,10 +61,7 @@ const InputName = styled.input`
 
 	&:hover { box-shadow: 0 0 5px white; }
 
-	&:focus { 
-		outline: none; 
-		background: white;
-	}
+	&:focus { outline: none; }
 `;
 
 const ButtonSearch = styled.button`
