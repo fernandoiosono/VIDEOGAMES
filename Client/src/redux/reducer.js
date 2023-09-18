@@ -2,19 +2,31 @@ import * as actionType from "./actionTypes.js";
 import * as viewCaption from "../views/viewCaptions.js";
 
 const initialState = {
+	// Initial Catalogs
 	allGames: [],
 	allGenres: [],
 	allPlatforms: [],
 
-	homeGames: [],
-	filteredGames: [],
-
-	lastPage : 0,
-	gameDetail: {},
-
-	currentView: {
+	currentView: { // To Show the Home Caption
 		caption: "",
 		payload: ""
+	},
+
+	lastPage : 0, // Selected at Home View
+	homeGames: [], // (Initial Catalog || Search)
+	gameDetail: {},
+	filteredHomeResults: [], // After (Filtering || Ordering)
+
+	homeResultsOptions: { // Filtering & Ordering Options
+		filter: {
+			genre: "",
+			platform: "",
+			origin: ""
+		},
+		order: {
+			type: "",
+			direction: ""
+		}
 	}
 };
 
@@ -44,7 +56,8 @@ const rootReducer = (state = initialState, action) => {
 		case actionType.SET_ALL_GAMES:
 			return { ...state,
 				allGames: action.payload,
-				homeGames: action.payload };
+				homeGames: action.payload,
+				filteredHomeResults: action.payload };
 
 		case actionType.SET_CURRENT_VIEW:
 			return { ...state,
